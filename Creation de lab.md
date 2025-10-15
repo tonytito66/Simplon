@@ -9,11 +9,11 @@
 - [Mises à jour réussies](#mises-à-jour-réussies)
   
 
-### Introduction
+### **Introduction**
 - A Marquer
 
 
-### Schéma réseau
+### **Schéma réseau**
 
 ```mermaid
 flowchart TD
@@ -34,11 +34,12 @@ flowchart TD
     C --> |joined| Z
 ```
 
-### Listes des comptes
+### **Listes des comptes**
+-A completer
 
 
 
-### *Verification du hash*
+### **Verification du hash**
 
 - Via la cmd Powershell
 - $hash = Get-FileHash C:\Chemin\vers\ton\fichier.iso,
@@ -49,17 +50,25 @@ flowchart TD
 
 <img width="1412" height="163" alt="image" src="https://github.com/user-attachments/assets/04711f8b-1491-4c0f-9964-256c819bbc05" />
 
-
- ### **Sha256 de l'ISO "Debian-12.7.0-amd64-netinst.iso**
+#### ***Sha256 de l'ISO "Debian-12.7.0-amd64-netinst.iso***
 <img width="736" height="54" alt="image" src="https://github.com/user-attachments/assets/d2a82a77-a182-4342-9608-1308f7acf410" />
  
- ### **Sha256 de l'ISO "Win10_22H2_French_x64v1.iso"**
+ #### ***Sha256 de l'ISO "Win10_22H2_French_x64v1.iso"***
 
 <img width="1270" height="412" alt="image" src="https://github.com/user-attachments/assets/67594484-273a-46fc-8dc0-6b1cf6a02e2e" />
 
- ### **Sha256 de l'ISO "fr-fr_windows_server_2022_x64_dvd_9f7d1adb.iso"**
+#### ***Sha256 de l'ISO "fr-fr_windows_server_2022_x64_dvd_9f7d1adb.iso"***
 <img width="1274" height="356" alt="image" src="https://github.com/user-attachments/assets/3408dc27-7620-4586-9424-1f54c2927517" />
 
-### Mises à jour réussies
+### **Mises à jour réussies**
+
+***Debian12***
+
+<img width="835" height="282" alt="image" src="https://github.com/user-attachments/assets/2573dfa6-a2a9-4433-b0fc-35afe06a4228" />
+
+***WinServ2022***
+
+<img width="1059" height="845" alt="image" src="https://github.com/user-attachments/assets/6ae090a1-c55c-4bfb-bbed-2044c2db1502" />
+
 
 
