@@ -1,6 +1,62 @@
 # Creation du Lab
 
-*Verificiation du hash*
+## Sommaire
 
-- Via la cmd Powershell "Get-FileHash C:\Chemin\vers\ton\fichier.iso"
-<img width="1292" height="201" alt="image" src="https://github.com/user-attachments/assets/cb1ffa96-11fa-4d71-a7ab-83161d3ac3f4" />
+- [Introduction](#introduction)
+- [Schéma réseau](#schéma-réseau)
+- [Listes des comptes](#listes-des-comptes)
+- [Verification du hash](#verification-du-hash)
+  
+
+### Introduction
+- A Marquer
+
+
+### Schéma réseau
+
+```mermaid
+flowchart TD
+    A[Hyperviseur] -->|hosts| W(Windows Server)
+    A --> | hosts| C(Windows Client)
+    A --> | hosts| L(Linux Server)
+
+    W --> |running| Z{AD DC}
+    W --> |running| E{DNS}
+    W --> |running| F{WinRM}
+    W --> |running| R{RDP}
+    W --> |running| G{SMB} 
+    W --> |executed| J>BadBlood] 
+
+    L --> |running| H{WEB VLA}
+    L --> |running| I{SSH}
+
+    C --> |joined| Z
+```
+
+### Listes des comptes
+
+
+
+### *Verification du hash*
+
+- Via la cmd Powershell
+- $hash = Get-FileHash C:\Chemin\vers\ton\fichier.iso,
+- puis en faisant
+- $hash.Hash eq 'hash/trouver/sur/le/sie/fabricant/'     ,pour comparer si les 2 hash sont totalement identique.
+  
+<img width="1295" height="321" alt="image" src="https://github.com/user-attachments/assets/18c2cef3-e010-443e-b396-419c6d9b40d2" />
+
+<img width="1412" height="163" alt="image" src="https://github.com/user-attachments/assets/04711f8b-1491-4c0f-9964-256c819bbc05" />
+
+
+ ### **Sha256 de l'ISO "Debian-12.7.0-amd64-netinst.iso**
+<img width="736" height="54" alt="image" src="https://github.com/user-attachments/assets/d2a82a77-a182-4342-9608-1308f7acf410" />
+ 
+ ### **Sha256 de l'ISO "Win10_22H2_French_x64v1.iso"**
+
+<img width="1270" height="412" alt="image" src="https://github.com/user-attachments/assets/67594484-273a-46fc-8dc0-6b1cf6a02e2e" />
+
+ ### **Sha256 de l'ISO "fr-fr_windows_server_2022_x64_dvd_9f7d1adb.iso"**
+<img width="1274" height="356" alt="image" src="https://github.com/user-attachments/assets/3408dc27-7620-4586-9424-1f54c2927517" />
+
+
