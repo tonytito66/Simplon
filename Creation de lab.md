@@ -6,6 +6,7 @@
 - [Schéma réseau](#schéma-réseau)
 - [Listes des comptes](#listes-des-comptes)
 - [Verification du hash](#verification-du-hash)
+- [Mises à jour réussies](#mises-à-jour-réussies)
   
 
 ### Introduction
@@ -58,5 +59,7 @@ flowchart TD
 
  ### **Sha256 de l'ISO "fr-fr_windows_server_2022_x64_dvd_9f7d1adb.iso"**
 <img width="1274" height="356" alt="image" src="https://github.com/user-attachments/assets/3408dc27-7620-4586-9424-1f54c2927517" />
+
+### Mises à jour réussies
 
 
