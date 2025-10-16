@@ -78,15 +78,20 @@ flowchart TD
 
 - ***Win10Client***
 
-![alt text](image-7.png)
+<img width="591" height="632" alt="image" src="https://github.com/user-attachments/assets/8fd16054-f80d-4839-aca1-838b30fdfa1f" />
+
 
 ## ***Statut des Services***
 
 - **DNS**
 
-![alt text](image-6.png)
+<img width="334" height="393" alt="image" src="https://github.com/user-attachments/assets/d33fde75-517e-4f7c-82a9-5b683247704c" />
+
 
 - **WEB**
+  
+
+
 
 
 ## ***Connexions SSH et WinRM***
@@ -95,43 +100,43 @@ flowchart TD
 
 **Serv-->Client**
 
-![alt text](image-8.png)
+<img width="290" height="67" alt="image" src="https://github.com/user-attachments/assets/e05caae5-386c-4de4-9b5c-8551e0dc82c5" />
+
 
 **Client-->Serv**
 
-![alt text](image-9.png)
-
+<img width="439" height="384" alt="image" src="https://github.com/user-attachments/assets/eae489bf-3837-4673-adf3-4a65d72a0285" />
 
 - ***WINRM***
 
 **Client-->Serv**
 
-![alt text](image-10.png),![alt text](image-13.png)
+<img width="484" height="624" alt="image" src="https://github.com/user-attachments/assets/f6885570-1483-4170-ac57-1a3f6353bbcc" />,<img width="830" height="446" alt="image" src="https://github.com/user-attachments/assets/977bec78-a24c-4249-93b8-1443c0b343a0" />
 
 **Serv-->Client**
 
-![alt text](image-11.png),![alt text](image-12.png)
+<img width="858" height="420" alt="image" src="https://github.com/user-attachments/assets/1e697d80-54e0-49b1-a148-85b551e1b72e" />, <img width="630" height="95" alt="image" src="https://github.com/user-attachments/assets/a6fe8451-4973-4686-91b9-02f6e177588a" />
+
 
 ## ***Mises en place de WinRM, Samba, Web-Linux***
 
 - ***WinRM***
 
-![alt text](image-1.png)
+<img width="631" height="197" alt="image" src="https://github.com/user-attachments/assets/3b997256-838f-463d-bcac-440e41a49568" />
 
 - ***Partage SMB***
 
 **Read Only**
 
-![alt text](image-2.png), ![alt text](image-3.png)
+<img width="483" height="598" alt="image" src="https://github.com/user-attachments/assets/e36dcd07-4f00-4a0b-a40d-746d9e65497b" />, <img width="484" height="600" alt="image" src="https://github.com/user-attachments/assets/553b23fa-571f-49a9-bfe9-1a1bad9df944" />
 
  **Write**
-
-![alt text](image-4.png), ![alt text](image-5.png)
+ 
+<img width="482" height="603" alt="image" src="https://github.com/user-attachments/assets/387341c4-1508-4ab9-af45-9cef86820245" />,<img width="483" height="600" alt="image" src="https://github.com/user-attachments/assets/2db054b2-4db9-4347-9278-da3207290a1c" />
 
 
 - ***Web-Linux***
+  
+<img width="812" height="398" alt="image" src="https://github.com/user-attachments/assets/ad6ea16c-13ee-4052-a1dd-adf9028f7a1d" />
 
-![alt text](image-14.png)
-
-![alt text](image-15.png)
-
+<img width="2506" height="461" alt="image" src="https://github.com/user-attachments/assets/31b29834-22ae-4ff7-ad8f-ea171a5d12c9" />
