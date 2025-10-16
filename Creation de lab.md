@@ -1,40 +1,33 @@
-# Creation du Lab
+# ***Creation Du lab***
 
-## Sommaire
+## **Sommaire**
 
 - [Introduction](#introduction)
+- [Caractéristiques des machines](#caractéristiques-des-machines)
 - [Schéma réseau](#schéma-réseau)
 - [Listes des comptes a risques](#listes-des-comptes-a-risques)
-- [Verification du hash](#verification-du-hash)
+- [Kanban](#kanban)
+- [Verification du hash via Powershell](#verification-du-hash-via-powershell)
 - [Mises à jour réussies](#mises-à-jour-réussies)
 - [Mises en place de WinRM, Samba, Web-Linux](#mises-en-place-de-winrm-samba-web-linux)
 - [Statut des Services](#statut-des-services)
 - [Connexions SSH et WinRM](#connexions-ssh-et-winrm)
+- [Nombre d'utilisateurs dans AD](nombre-d'utilisateurs-dans-AD)
 
 ## **Introduction**
-- A Marquer
 
+- Création d'un lab dans un environnement à la fois vulnérable et réaliste par rapport aux services disponibles en entreprise
+
+## **Caractéristiques des machines**
+
+- Windows Server2022 : 4 GB de ram
+- Windows 10 : 4 GB de ram
+- Debian12 : 4 GB de ram
 
 ## **Schéma réseau**
 
-```mermaid
-flowchart TD
-    A[Hyperviseur] -->|hosts| W(Windows Server)
-    A --> | hosts| C(Windows Client)
-    A --> | hosts| L(Linux Server)
+<img width="771" height="391" alt="Reseauxlab2" src="https://github.com/user-attachments/assets/2d52e174-3639-4a71-8b55-bb933187a713" />
 
-    W --> |running| Z{AD DC}
-    W --> |running| E{DNS}
-    W --> |running| F{WinRM}
-    W --> |running| R{RDP}
-    W --> |running| G{SMB} 
-    W --> |executed| J>BadBlood] 
-
-    L --> |running| H{WEB VLA}
-    L --> |running| I{SSH}
-
-    C --> |joined| Z
-```
 
 ## **Listes des comptes a risques**
 
@@ -84,13 +77,21 @@ flowchart TD
 | **Linux** | **Comptes avec UID 0** | Utilisateur | Tout compte avec UID 0 = root. | Extrême | Contournement total des restrictions. |
 | **Linux** | **Comptes de service (www-data, mysql, postfix, etc.)** | Utilisateur | Comptes utilisés par des services. | Moyen/Élevé | Vulnérables selon leur rôle et permissions. |
 
+## **Kanban**
 
-## **Verification du hash**
+<img width="848" height="1132" alt="image" src="https://github.com/user-attachments/assets/da705ac9-9bcb-401e-afdb-eb9b702499e5" />
 
-- Via la cmd Powershell
-- $hash = Get-FileHash C:\Chemin\vers\ton\fichier.iso,
-- puis en faisant
-- $hash.Hash eq 'hash/trouver/sur/le/sie/fabricant/'     ,pour comparer si les 2 hash sont totalement identique.
+## **Verification du hash via Powershell**
+
+- ***Calculer le hash du fichier***
+
+```powershell
+$hash = Get-FileHash "C:\Chemin\vers\ton\fichier.iso"
+```
+- ***Comparer avec le hash fourni par le fabricant***
+```powershell
+$hash.Hash -eq "hash_trouvé_sur_le_site_du_fabricant"
+```
   
 <img width="1295" height="321" alt="image" src="https://github.com/user-attachments/assets/18c2cef3-e010-443e-b396-419c6d9b40d2" />
 
@@ -121,7 +122,7 @@ flowchart TD
 <img width="591" height="632" alt="image" src="https://github.com/user-attachments/assets/8fd16054-f80d-4839-aca1-838b30fdfa1f" />
 
 
-## ***Statut des Services***
+## **Statut des Services**
 
 - **DNS**
 
@@ -134,9 +135,16 @@ flowchart TD
 
 
 
-## ***Connexions SSH et WinRM***
+## **Connexions SSH et WinRM**
+  
+- **Linux**
 
-- ***SSH***
+**Client-->Serv**
+
+<img width="499" height="208" alt="image" src="https://github.com/user-attachments/assets/029973cf-bcf2-4e71-b378-ca667e54fbc4" />
+
+
+- **Windows** 
 
 **Serv-->Client**
 
@@ -158,7 +166,7 @@ flowchart TD
 <img width="858" height="420" alt="image" src="https://github.com/user-attachments/assets/1e697d80-54e0-49b1-a148-85b551e1b72e" />, <img width="630" height="95" alt="image" src="https://github.com/user-attachments/assets/a6fe8451-4973-4686-91b9-02f6e177588a" />
 
 
-## ***Mises en place de WinRM, Samba, Web-Linux***
+## **Mises en place de WinRM, Samba, Web-Linux**
 
 - ***WinRM***
 
@@ -168,11 +176,12 @@ flowchart TD
 
 **Read Only**
 
-<img width="483" height="598" alt="image" src="https://github.com/user-attachments/assets/e36dcd07-4f00-4a0b-a40d-746d9e65497b" />, <img width="484" height="600" alt="image" src="https://github.com/user-attachments/assets/553b23fa-571f-49a9-bfe9-1a1bad9df944" />
+<img width="483" height="598" alt="image" src="https://github.com/user-attachments/assets/e36dcd07-4f00-4a0b-a40d-746d9e65497b" />, <img width="484" height="600" alt="image" src="https://github.com/user-attachments/assets/553b23fa-571f-49a9-bfe9-1a1bad9df944" />, <img width="441" height="451" alt="image" src="https://github.com/user-attachments/assets/5882bd32-8007-4808-8135-6900a995fca9" />
+
 
  **Write**
  
-<img width="482" height="603" alt="image" src="https://github.com/user-attachments/assets/387341c4-1508-4ab9-af45-9cef86820245" />,<img width="483" height="600" alt="image" src="https://github.com/user-attachments/assets/2db054b2-4db9-4347-9278-da3207290a1c" />
+<img width="482" height="603" alt="image" src="https://github.com/user-attachments/assets/387341c4-1508-4ab9-af45-9cef86820245" />,<img width="483" height="600" alt="image" src="https://github.com/user-attachments/assets/2db054b2-4db9-4347-9278-da3207290a1c" />, <img width="445" height="454" alt="image" src="https://github.com/user-attachments/assets/ebef2a31-d053-443d-a7fa-ac5bd0feee3f" />
 
 
 - ***Web-Linux***
@@ -180,3 +189,5 @@ flowchart TD
 <img width="812" height="398" alt="image" src="https://github.com/user-attachments/assets/ad6ea16c-13ee-4052-a1dd-adf9028f7a1d" />
 
 <img width="2506" height="461" alt="image" src="https://github.com/user-attachments/assets/31b29834-22ae-4ff7-ad8f-ea171a5d12c9" />
+
+## **Nombre d'utilisateurs dans AD**
