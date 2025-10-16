@@ -4,7 +4,7 @@
 
 - [Introduction](#introduction)
 - [Schéma réseau](#schéma-réseau)
-- [Listes des comptes](#listes-des-comptes)
+- [Listes des comptes a risques](#listes-des-comptes-a-risques)
 - [Verification du hash](#verification-du-hash)
 - [Mises à jour réussies](#mises-à-jour-réussies)
 - [Mises en place de WinRM, Samba, Web-Linux](#mises-en-place-de-winrm-samba-web-linux)
@@ -36,13 +36,53 @@ flowchart TD
     C --> |joined| Z
 ```
 
-## **Listes des comptes**
+## **Listes des comptes a risques**
 
-| Utilisateurs   | Emplacement |Systeme  |
-|-------------|------------|------|
-| Admin    |Local        |WinServ    |
-| Anthoad  |Local          |WinServ    |
+- ***Comptes et Groupes Privilégiés ou Critiques – Windows Server, Windows 10 et Linux***
 
+| Plateforme            | Nom du compte/groupe                     | Type                          | Description                                                                                     | Niveau de risque | Risque spécifique / Exemple d’exploitation |
+|-----------------------|------------------------------------------|-------------------------------|-------------------------------------------------------------------------------------------------|------------------|-------------------------------------------|
+| **Windows Server (AD)** | **Administrateur** | Utilisateur | Compte d’administration local. | Extrême | Accès total au système local. |
+| **Windows Server (AD)** | **Administrateurs** | Groupe de sécurité - Global | Contrôle total sur le domaine. | Extrême | Accès complet à toutes les ressources AD. |
+| **Windows Server (AD)** | **Administrateurs clés Enterprise** | Groupe de sécurité - Universel | Administration critique dans toute la forêt. | Extrême | Compromission = contrôle complet de la forêt. |
+| **Windows Server (AD)** | **Administrateurs de l’entreprise** | Groupe de sécurité - Universel | Contrôle total de la forêt AD. | Extrême | Peut déléguer les droits sur tous les domaines. |
+| **Windows Server (AD)** | **Administrateurs du schéma** | Groupe de sécurité - Universel | Peut modifier le schéma AD. | Extrême | Modification du schéma = impact global irréversible. |
+| **Windows Server (AD)** | **Admins du domaine / Domain Admins** | Groupe de sécurité - Global | Contrôle total du domaine. | Extrême | Peut élever tout compte au niveau admin. |
+| **Windows Server (AD)** | **DnsAdmins** | Groupe de sécurité - Domaine local | Peut exécuter du code arbitraire en tant que SYSTEM sur le serveur DNS. | Extrême | Exploitation classique via DLL malveillante. |
+| **Windows Server (AD)** | **Contrôleurs de domaine** | Groupe de sécurité - Global | Tous les DC du domaine. | Extrême | Contrôle complet sur l’annuaire AD. |
+| **Windows Server (AD)** | **krbtgt** | Compte de service AD | Utilisé pour le chiffrement Kerberos. | Extrême | Attaque Golden Ticket (forgery de tickets). |
+| **Windows Server (AD)** | **Group Policy Creator Owners** | Groupe de sécurité - Domaine local | Peut créer et modifier des GPO. | Élevé | GPO malveillante = exécution à distance. |
+| **Windows Server (AD)** | **Backup Operators** | Groupe de sécurité - Domaine local | Peut sauvegarder et restaurer des fichiers. | Élevé | Accès indirect à des données sensibles. |
+| **Windows Server (AD)** | **Account Operators** | Groupe de sécurité - Domaine local | Peut créer/modifier des comptes utilisateurs. | Élevé | Création de comptes administrateurs cachés. |
+| **Windows Server (AD)** | **Server Operators** | Groupe de sécurité - Domaine local | Peut gérer les services et ressources du serveur. | Élevé | Arrêt, redémarrage, gestion de services sensibles. |
+| **Windows Server (AD)** | **Hyper-V Admins** | Groupe de sécurité - Domaine local | Contrôle les machines virtuelles. | Élevé | Accès au disque virtuel = vol de credentials. |
+| **Windows Server (AD)** | **Remote Management Users** | Groupe local | Peut exécuter des commandes à distance (PowerShell Remoting). | Élevé | Exécution de code via WinRM. |
+| **Windows Server (AD)** | **RDP Users** | Groupe local | Peut se connecter à distance via RDP. | Moyen/Élevé | Accès distant si MFA absent. |
+| **Windows Server (AD)** | **Replicator** | Groupe de sécurité - Domaine local | Utilisé pour la réplication de fichiers. | Élevé | Peut exfiltrer des données sensibles. |
+| **Windows Server (AD)** | **SYSTEM** | Compte système | Compte système interne Windows. | Extrême | Exécution avec tous les privilèges. |
+| **Windows Server (AD)** | **TrustedInstaller** | Compte système | Gère les installations Windows. | Très élevé | Peut modifier des fichiers système. |
+| **Windows Server (AD)** | **Network Service** | Compte système | Service réseau avec privilèges limités. | Élevé | Escalade possible via services vulnérables. |
+| **Windows Server (AD)** | **Local Service** | Compte système | Service local à permissions restreintes. | Moyen | Risque limité, mais exploitable localement. |
+| **Windows 10** | **Administrateur local** | Utilisateur | Accès complet à la machine. | Extrême | Peut désactiver sécurité et exécuter code arbitraire. |
+| **Windows 10** | **SYSTEM / TrustedInstaller** | Compte système | Contrôle total du système. | Extrême | Manipulation directe de fichiers système. |
+| **Windows 10** | **Remote Desktop Users** | Groupe local | Accès RDP distant. | Élevé | Tentatives de brute-force RDP. |
+| **Windows 10** | **Remote Management Users** | Groupe local | Exécution à distance via PowerShell. | Élevé | Exécution de commandes sans MFA. |
+| **Windows 10** | **Power Users** | Groupe local | Droits élevés hérités des anciennes versions. | Moyen/Élevé | Peut exécuter ou installer des logiciels. |
+| **Windows 10** | **Users (Builtin)** | Groupe local | Groupe de base des comptes locaux. | Moyen | Mauvaise configuration = élévation potentielle. |
+| **Linux** | **root** | Utilisateur | Superutilisateur avec accès complet. | Extrême | Contrôle total du système. |
+| **Linux** | **sudo** | Groupe | Peut exécuter des commandes en tant que root. | Très élevé | Mauvaise config sudoers = accès root. |
+| **Linux** | **wheel** | Groupe | Peut utiliser `sudo` (selon la distro). | Très élevé | Membre = élévation directe. |
+| **Linux** | **adm** | Groupe | Peut lire les logs système. | Moyen | Accès à journaux sensibles. |
+| **Linux** | **shadow** | Groupe | Accès à `/etc/shadow`. | Extrême | Lecture des mots de passe hachés. |
+| **Linux** | **operator** | Groupe | Peut effectuer certaines opérations système. | Élevé | Exécution de commandes critiques. |
+| **Linux** | **staff** | Groupe | Peut installer des logiciels localement. | Élevé | Installation de binaires malveillants. |
+| **Linux** | **docker** | Groupe | Contrôle indirect de root via conteneur privilégié. | Extrême | Accès root via `--privileged` ou volumes. |
+| **Linux** | **lxd / libvirt / kvm** | Groupes | Accès à la virtualisation. | Élevé/Extrême | Accès à l’hôte via VM. |
+| **Linux** | **systemd-journal** | Groupe | Peut lire journaux du système. | Moyen | Accès à des infos sensibles. |
+| **Linux** | **bin, daemon, sys, sync, games, lp, mail** | Comptes système | Comptes système historiques. | Moyen | Risques faibles mais existants. |
+| **Linux** | **nobody / nogroup** | Utilisateur/Groupe | Utilisé pour processus anonymes. | Moyen | Peut être détourné pour exécution anonyme. |
+| **Linux** | **Comptes avec UID 0** | Utilisateur | Tout compte avec UID 0 = root. | Extrême | Contournement total des restrictions. |
+| **Linux** | **Comptes de service (www-data, mysql, postfix, etc.)** | Utilisateur | Comptes utilisés par des services. | Moyen/Élevé | Vulnérables selon leur rôle et permissions. |
 
 
 ## **Verification du hash**
