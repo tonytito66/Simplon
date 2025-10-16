@@ -192,6 +192,29 @@ $hash.Hash -eq "hash_trouvé_sur_le_site_du_fabricant"
 
 ## **Nombre d'utilisateurs dans AD**
 
-- ***Lancement du Script Badblood***
- 
+### ***Lancement du Script Badblood***
+
+ - Creation 2500 User
+  
 <img width="1167" height="692" alt="image" src="https://github.com/user-attachments/assets/9ebb3bf8-0b18-438d-94db-b1603447fef8" />
+
+- Creation 500 Group
+
+<img width="1171" height="694" alt="image" src="https://github.com/user-attachments/assets/14930ab6-4989-4a8a-bcc1-014548a123da" />
+
+- Creation 100 Ordi
+  
+<img width="1172" height="696" alt="image" src="https://github.com/user-attachments/assets/a4586575-9dae-4777-874a-2a5dfbc828b6" />
+
+- Creation permissions aleatoire
+
+<img width="1166" height="685" alt="image" src="https://github.com/user-attachments/assets/23fd9f10-69f5-4bdd-b0a4-79917fd6cf4e" />
+
+- Final
+
+<img width="571" height="494" alt="image" src="https://github.com/user-attachments/assets/81b79812-b93c-4422-8164-cd4692f3ed5c" />
+
+
+
+
+
