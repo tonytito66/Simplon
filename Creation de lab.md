@@ -191,3 +191,7 @@ $hash.Hash -eq "hash_trouvé_sur_le_site_du_fabricant"
 <img width="2506" height="461" alt="image" src="https://github.com/user-attachments/assets/31b29834-22ae-4ff7-ad8f-ea171a5d12c9" />
 
 ## **Nombre d'utilisateurs dans AD**
+
+- ***Lancement du Script Badblood***
+ 
+<img width="1167" height="692" alt="image" src="https://github.com/user-attachments/assets/9ebb3bf8-0b18-438d-94db-b1603447fef8" />
