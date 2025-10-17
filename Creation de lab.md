@@ -133,8 +133,7 @@ $hash.Hash -eq "hash_trouvé_sur_le_site_du_fabricant"
 
 - **WEB**
   
-
-
+<img width="610" height="174" alt="image" src="https://github.com/user-attachments/assets/ed47b269-7f16-49a6-b080-cb7b325ad2f5" />
 
 
 ## **Connexions SSH et WinRM**
