@@ -81,6 +81,8 @@
 
 <img width="848" height="1132" alt="image" src="https://github.com/user-attachments/assets/da705ac9-9bcb-401e-afdb-eb9b702499e5" />
 
+https://trello.com/b/WH7sXlZN/creation-de-lab
+
 ## **Verification du hash via Powershell**
 
 - ***Calculer le hash du fichier***
