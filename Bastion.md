@@ -48,9 +48,13 @@ J’ai préféré choisir Teleport car cette solution me paraît plus sécurisé
 
 ## **Capture D'ecran du fonctionnement de Guacamole**
 
-<img width="899" height="737" alt="image" src="https://github.com/user-attachments/assets/5fb9ab52-bb5a-49eb-b99d-12fe0bdcd9f1" />,
+<img width="899" height="737" alt="image" src="https://github.com/user-attachments/assets/5fb9ab52-bb5a-49eb-b99d-12fe0bdcd9f1" />
 
-<img width="1062" height="289" alt="image" src="https://github.com/user-attachments/assets/fab01bbf-5baf-4ac2-98a2-2fcfa62aaba7" />,
+---
+
+<img width="1062" height="289" alt="image" src="https://github.com/user-attachments/assets/fab01bbf-5baf-4ac2-98a2-2fcfa62aaba7" />
+
+---
 
 <img width="1366" height="580" alt="image" src="https://github.com/user-attachments/assets/f654f023-9bdd-4fe8-8262-bbe28d64dadd" />
 
