@@ -54,4 +54,6 @@ J’ai préféré choisir Teleport car cette solution me paraît plus sécurisé
 
 <img width="1366" height="580" alt="image" src="https://github.com/user-attachments/assets/f654f023-9bdd-4fe8-8262-bbe28d64dadd" />
 
+- **Mise en place du MFA**
 
+<img width="1746" height="1178" alt="image" src="https://github.com/user-attachments/assets/591b9aa8-ea8d-42e8-ae2e-c4149438db57" />
