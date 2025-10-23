@@ -147,6 +147,11 @@ Cela doit afficher "Valid"
 
 <img width="935" height="60" alt="image" src="https://github.com/user-attachments/assets/23d54be8-a792-43d2-ab54-0e9f64fc0534" />
 
+## 5- Script Final 
+
+<img width="748" height="1313" alt="image" src="https://github.com/user-attachments/assets/0f3b7fb5-a5fa-4459-8aec-793a099c05a3" />
+
+
    
   
     
