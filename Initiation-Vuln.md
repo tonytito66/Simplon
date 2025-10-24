@@ -102,4 +102,6 @@ CVSS 5.3 Medium
 
 0.20%
 
-## Log4shell
+## Log4shell 
+
+- ***CVE***
