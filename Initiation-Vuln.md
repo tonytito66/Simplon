@@ -29,15 +29,15 @@
 
 ## Sommaire
 
-1 - [Eternal Blue](*eternal-blue)
+- [Eternal Blue](*eternal-blue)
 
-2 - [Krack](*krack)
+- [Krack](*krack)
 
-3 - [Log4shell](*log4shell)
+- [Log4shell](*log4shell)
 
-4 - [Looney-tunables](*looney-tunables)
+- [Looney-tunables](*looney-tunables)
 
-5 - [Netgear](*netgear)
+- [Netgear](*netgear)
 
 
 ## Eternal Blue
