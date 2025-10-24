@@ -6,7 +6,7 @@
 
 - Eternal Blue
 - Krack
-- log4shell
+- Log4shell
 - Looney-tunables
 - Une vulnérabilité récente de votre choix issue du site du CERT-Fr
 
@@ -27,8 +27,14 @@
 
 
 ## Sommaire
+
 1 - [Eternal Blue](*eternal-blue)
+
 2 - [Krack](*krack)
-3 - [
-4 -
-8 -
+
+3 - [Log4shell](*log4shell)
+
+4 - [Looney-tunables](*looney-tunables)
+
+5 -
+
