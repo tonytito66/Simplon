@@ -18,9 +18,10 @@ A partir du Lab installé, ajouter les services nécessaires et répondre aux qu
 
 ### Questions
 
-0. Quels sont les `flags TCP` ?
+ ## 0. Quels sont les `flags TCP` ?
 
-0. | **Nom du Flag** | **Acronyme**              | **Rôle / Description**                                                                                              |
+
+| **Nom du Flag** | **Acronyme**              | **Rôle / Description**                                                                                              |
 | --------------- | ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
 | **URG**         | Urgent                    | Indique que le champ **Urgent Pointer** est valide et que certaines données doivent être traitées en priorité.      |
 | **ACK**         | Acknowledgment            | Indique que le champ **Acknowledgment Number** est valide. Sert à confirmer la réception de paquets.                |
@@ -32,11 +33,11 @@ A partir du Lab installé, ajouter les services nécessaires et répondre aux qu
 | **CWR**         | Congestion Window Reduced | Indique que l’émetteur a réduit sa fenêtre de congestion à cause d’une notification ECN.                            |
 | **NS**          | Nonce Sum                 | Utilisé pour vérifier l’intégrité de la gestion ECN (rarement utilisé).                                             |
 
-1. Capturer le processus `DORA` du protocole DHCP
+## 1. Capturer le processus `DORA` du protocole DHCP
 
 - ![Capture Wireshark](Images/DHCP.png)
 
-2. Qu’est ce que le `DHCP Starvation` / `snooping` ? `Rogue DHCP` ?
+## 2. Qu’est ce que le `DHCP Starvation` / `snooping` ? `Rogue DHCP` ?
 
 - DHCP Starvation : attaque où un attaquant envoie massivement des DHCPDISCOVER (souvent avec des adresses MAC fictives) pour exhausser la table de baux du serveur DHCP et épuiser toutes les adresses disponibles → empêche les clients légitimes d’obtenir une adresse.
 
@@ -44,7 +45,7 @@ A partir du Lab installé, ajouter les services nécessaires et répondre aux qu
 
 - Rogue DHCP : serveur DHCP malveillant ou mal configuré dans le réseau qui fournit de mauvaises informations (gateway DNS malicieux…) → redirection, interception, MITM.
 
-3. Que ce passe-t-il lors de l'execution de la commande `ipconfig /release` (windows) ? D’un point de vue sécurité quel peut etre l'enjeu ?
+## 3. Que ce passe-t-il lors de l'execution de la commande `ipconfig /release` (windows) ? D’un point de vue sécurité quel peut etre l'enjeu ?
 
 - le client Windows envoie (si possible) un DHCPRELEASE au serveur DHCP pour libérer l’adresse et supprime l’adresse localement.
 
@@ -54,11 +55,11 @@ A partir du Lab installé, ajouter les services nécessaires et répondre aux qu
 
 - ipconfig /release n’est pas en soi dangereux, mais dans un réseau compromis il peut être exploité pour provoquer un déni de service local, ou pousser des clients vers un serveur DHCP rogue.
 
-4. Quelle fonctionnalité propose CISCO pour se prémunir des `attaques DHCP` ?
+## 4. Quelle fonctionnalité propose CISCO pour se prémunir des `attaques DHCP` ?
 
 - Cisco : implémente DHCP Snooping, ainsi que IP Source Guard et Dynamic ARP Inspection (DAI) qui tirent parti de la table DHCP-snooping pour empêcher usurpation d’IP/MAC et attaques ARP.
 
-5. Capturer une `requête DNS` et sa réponse
+## 5. Capturer une `requête DNS` et sa réponse
 
 ***Requête DNS***
 
@@ -68,7 +69,7 @@ A partir du Lab installé, ajouter les services nécessaires et répondre aux qu
 
 - ![ReponseDNS](Images/DNS_rep.png)
 
-6. Qu’est-ce que le `DNS Spoofing` ? Comment s’en protéger ?
+## 6. Qu’est-ce que le `DNS Spoofing` ? Comment s’en protéger ?
 
 - L’usurpation de DNS est une cyberattaque par laquelle un pirate modifie les enregistrements DNS afin de rediriger le trafic d’un site web légitime vers un site frauduleux. Cela peut conduire au vol de données, à l’hameçonnage ou à l’installation de logiciels malveillants. Les attaquants exploitent les faiblesses des protocoles DNS ou utilisent l’empoisonnement du cache pour tromper les utilisateurs.
 
@@ -80,7 +81,7 @@ A partir du Lab installé, ajouter les services nécessaires et répondre aux qu
 
 - Utiliser résolveurs fiables, durcir et patcher serveurs DNS, monitoring (détecter réponses inattendues), limiter recursion pour serveurs publics, sécuriser accès aux résolveurs.
 
-7. Qu’est-ce que `DNSSec` ? `DNS over TLS` ou `DNS over HTTPS` ?
+## 7. Qu’est-ce que `DNSSec` ? `DNS over TLS` ou `DNS over HTTPS` ?
 
 - DNSSEC : ensemble d’extensions du DNS qui ajoutent des signatures numériques (RRsig) aux enregistrements DNS et une chaîne de confiance (via clés publiques) pour vérifier que la réponse n’a pas été altérée et provient bien de la zone signée. DNSSEC n’encrypte pas la requête, il assure authenticité et intégrité.
 
@@ -89,7 +90,7 @@ A partir du Lab installé, ajouter les services nécessaires et répondre aux qu
 - DNS over HTTPS (DoH) : DNS chiffré transporté sur HTTPS (généralement port 443). Avantage : passe facilement les proxys/firewalls, mais soulève des débat sur centralisation des résolveurs.
 
 
-8. Dans quels cas trouve-t-on du DNS sur TCP ?
+## 8. Dans quels cas trouve-t-on du DNS sur TCP ?
 Le DNS utilise généralement le protocole UDP car les requêtes et les réponses sont petites et rapides, et UDP ne nécessite pas d'établissement de connexion, ce qui est efficace pour le trafic léger. Cependant, on trouve du DNS sur TCP dans certains cas spécifiques :
 
 - Quand la taille d'une réponse DNS dépasse la limite d'UDP (historique 512 octets, aujourd’hui souvent un peu plus grâce à EDNS), la réponse est tronquée en UDP et le client doit refaire la requête en TCP pour récupérer la réponse complète.
@@ -98,39 +99,65 @@ Le DNS utilise généralement le protocole UDP car les requêtes et les réponse
 
 - Si une requête DNS échoue en UDP (pas de réponse reçue), le client peut tenter une retransmission via TCP.
 
-9. Capturer un flux `HTTP`
+## 9. Capturer un flux `HTTP`
 
 ![HTTP](Images/HTTP.png)
 
-10. Qu’est-ce que le `HTTP Smuggling` ? Donner un exemple de `CVE`
+## 10. Qu’est-ce que le `HTTP Smuggling` ? Donner un exemple de `CVE`
 
-11. Comment mettre en place la confidentialité et l'authenticité pour HTTP ?
+- L’objectif de l’attaque HTTP request smuggling est de désynchroniser la communication entre le serveur frontal (proxy ou load balancer) et le serveur backend. Cette désynchronisation survient lorsque ces deux serveurs interprètent différemment la taille du corps d’une requête HTTP.
 
-12. Qu’est-ce qu’une `PKI` ?
+Le problème vient principalement de la coexistence des en-têtes Content-Length et Transfer-Encoding. Normalement, un serveur utilise Content-Length pour définir la taille du contenu d’une requête. Cependant, si l’un des serveurs prend en charge Transfer-Encoding, mais pas l’autre, une ambiguïté peut apparaître.
 
-13. Capturer un `mot de passe` HTTP via le projet VulnerableLightApp.
+En exploitant cette confusion, un attaquant peut :
 
-14. Comment mettre en place la `confidentialité` pour ce service ?
+- Injecter des requêtes malveillantes dans le flux de communication.
+- Forcer d’autres utilisateurs à exécuter des requêtes à leur insu.
+- Intercepter des réponses HTTP destinées à d’autres utilisateurs.
+- Polluer la file de réponses d’un serveur, provoquant des dysfonctionnements proches d’une attaque DoS, tout en permettant le vol d’informations sensibles.
 
-15. Capturer un `handshake TLS`
 
-16. Qu’est-ce qu’une autorité de certification (`AC`) racine ? Qu'est qu'une `AC intermediaire` ?
+## 11. Comment mettre en place la confidentialité et l'authenticité pour HTTP ?
 
-17. Connectez-vous sur `taisen.fr` et affichez la `chaine de confiance` du certificat
+- Utiliser HTTPS (TLS) : chiffrement + authentification (certificat serveur) → confidentialité + intégrité + authentification du serveur.
 
-18. Capturer une authentification `Kerberos` (mettre en place le service si nécessaire), identifier l'`AS_REQ`, `AS_REP` et les messages suivants.
+Bonnes pratiques TLS :
 
-19. Capturer une `authentification RDP` (mettre en place le service si nécessaire), quel est le protocole d'authentification capturé ?
+Forcer TLS 1.2+ (idéal TLS 1.3), chiffres modernes, désactiver SSL/TLS anciens.
 
-20. Quelles sont les attaques connues sur `NetLM` ?
+HSTS (HTTP Strict Transport Security) pour forcer clients à utiliser HTTPS.
 
-21. Capturer une `authentification WinRM` (Vous pouvez utiliser EvilWinRM si nécessaire côté client.), quel est le protocole d'authentification capturé ?
+Certificats valides délivrés par AC de confiance, renouvellement/rotation, OCSP stapling.
 
-22. Capturer une `authentification SSH` ou SFTP (mettre en place le service si nécessaire)
+## 12. Qu’est-ce qu’une `PKI` ?
 
-23. Intercepter un `fichier au travers du protocole SMB`
+- Une PKI, ou Infrastructure à Clé Publique (Public Key Infrastructure en anglais), est un ensemble de technologies, de politiques et de procédures destinées à gérer de manière sécurisée les clés cryptographiques et les certificats numériques. La PKI permet d'authentifier les identités des utilisateurs ou des appareils, de chiffrer les communications pour garantir leur confidentialité, et d'assurer l'intégrité et la non-répudiation des échanges numériques.
 
-24. Comment proteger l'`authenticité` et la `confidentialité` d'un partage SMB ?
+## 13. Capturer un `mot de passe` HTTP via le projet VulnerableLightApp.
+
+## 14. Comment mettre en place la `confidentialité` pour ce service ?
+
+## 15. Capturer un `handshake TLS`
+
+![TLS](Images/TLS.png)
+
+## 16. Qu’est-ce qu’une autorité de certification (`AC`) racine ? Qu'est qu'une `AC intermediaire` ?
+
+## 17. Connectez-vous sur `taisen.fr` et affichez la `chaine de confiance` du certificat
+
+## 18. Capturer une authentification `Kerberos` (mettre en place le service si nécessaire), identifier l'`AS_REQ`, `AS_REP` et les messages suivants.
+
+## 19. Capturer une `authentification RDP` (mettre en place le service si nécessaire), quel est le protocole d'authentification capturé ?
+
+## 20. Quelles sont les attaques connues sur `NetLM` ?
+
+## 21. Capturer une `authentification WinRM` (Vous pouvez utiliser EvilWinRM si nécessaire côté client.), quel est le protocole d'authentification capturé ?
+
+## 22. Capturer une `authentification SSH` ou SFTP (mettre en place le service si nécessaire)
+
+## 23. Intercepter un `fichier au travers du protocole SMB`
+
+## 24. Comment proteger l'`authenticité` et la `confidentialité` d'un partage SMB ?
 
 > [!TIP]
 > Bonus : **Déchiffrer le traffic TLS** en important la clé privée du certificat dans Wireshark et **reconstituer le fichier** qui à transité sur le réseau à l'aide de Wireshark
