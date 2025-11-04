@@ -21,9 +21,24 @@ A partir du Lab installé, ajouter les services nécessaires et répondre aux qu
 
 0. Quels sont les `flags TCP` ?
 
+| **Nom du Flag** | **Acronyme**              | **Rôle / Description**                                                                                              |
+| --------------- | ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **URG**         | Urgent                    | Indique que le champ **Urgent Pointer** est valide et que certaines données doivent être traitées en priorité.      |
+| **ACK**         | Acknowledgment            | Indique que le champ **Acknowledgment Number** est valide. Sert à confirmer la réception de paquets.                |
+| **PSH**         | Push                      | Demande à l’hôte récepteur de traiter immédiatement les données (sans attendre un buffer plein).                    |
+| **RST**         | Reset                     | Réinitialise brutalement la connexion TCP. Sert à refuser ou interrompre une session.                               |
+| **SYN**         | Synchronize               | Sert à synchroniser les numéros de séquence lors de l’établissement d’une connexion (le fameux "SYN" du handshake). |
+| **FIN**         | Finish                    | Indique la fin de la transmission (fermeture propre de la connexion).                                               |
+| **ECE**         | ECN Echo                  | Utilisé pour la notification de congestion explicite (ECN).                                                         |
+| **CWR**         | Congestion Window Reduced | Indique que l’émetteur a réduit sa fenêtre de congestion à cause d’une notification ECN.                            |
+| **NS**          | Nonce Sum                 | Utilisé pour vérifier l’intégrité de la gestion ECN (rarement utilisé).                                             |
+
+
 1. Capturer le processus `DORA` du protocole DHCP
 
-2. qu’est ce que le `DHCP Starvation` / `snooping` ? `Rogue DHCP` ?
+![Capture Wireshark](C:\Users\tony_\Documents\Git\Simplon\Images\Wireshark\DHCP.png)
+
+2. Qu’est ce que le `DHCP Starvation` / `snooping` ? `Rogue DHCP` ?
 
 3. Que ce passe-t-il lors de l'execution de la commande `ipconfig /release` (windows) ? D’un point de vue sécurité quel peut etre l'enjeu ?
 
@@ -71,6 +86,16 @@ A partir du Lab installé, ajouter les services nécessaires et répondre aux qu
 
 > [!TIP]
 > Bonus : **Déchiffrer le traffic TLS** en important la clé privée du certificat dans Wireshark et **reconstituer le fichier** qui à transité sur le réseau à l'aide de Wireshark
+
+
+
+### Reponses Rappels
+
+* Quelle est votre adresse IP ? Quelle est sa classe (IPv4) ?  `192.168.0.11  classe C`
+
+* Quel est votre masque de sous-réseau ? `255.255.255.0`     
+
+* Quelle est l'adresse de votre passerelle ? `192.168.0.1`
 
 
 ### Reponses
