@@ -36,7 +36,7 @@ A partir du Lab installé, ajouter les services nécessaires et répondre aux qu
 
 1. Capturer le processus `DORA` du protocole DHCP
 
-![Capture Wireshark](C:\Users\tony_\Documents\Git\Simplon\Images\Wireshark\DHCP.png)
+![Capture Wireshark](C:\Users\tony_\Documents\Git\Simplon\Images\DHCP.png)
 
 2. Qu’est ce que le `DHCP Starvation` / `snooping` ? `Rogue DHCP` ?
 
