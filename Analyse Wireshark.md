@@ -159,5 +159,3 @@ Certificats valides délivrés par AC de confiance, renouvellement/rotation, OCS
 
 ## 24. Comment proteger l'`authenticité` et la `confidentialité` d'un partage SMB ?
 
-> [!TIP]
-> Bonus : **Déchiffrer le traffic TLS** en important la clé privée du certificat dans Wireshark et **reconstituer le fichier** qui à transité sur le réseau à l'aide de Wireshark
