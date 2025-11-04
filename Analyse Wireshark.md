@@ -8,12 +8,11 @@ A partir du Lab installé, ajouter les services nécessaires et répondre aux qu
 
 ### Rappels
 
-* Quelle est votre adresse IP ? Quelle est sa classe (IPv4) ?
+* Quelle est votre adresse IP ? Quelle est sa classe (IPv4) ?  `192.168.0.11  classe C`
 
-* Quel est votre masque de sous-réseau ?
+* Quel est votre masque de sous-réseau ? `255.255.255.0`     
 
-* Quelle est l'adresse de votre passerelle ?
-
+* Quelle est l'adresse de votre passerelle ? `192.168.0.1`
 ---
 
 
@@ -21,7 +20,7 @@ A partir du Lab installé, ajouter les services nécessaires et répondre aux qu
 
 0. Quels sont les `flags TCP` ?
 
-| **Nom du Flag** | **Acronyme**              | **Rôle / Description**                                                                                              |
+0. | **Nom du Flag** | **Acronyme**              | **Rôle / Description**                                                                                              |
 | --------------- | ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
 | **URG**         | Urgent                    | Indique que le champ **Urgent Pointer** est valide et que certaines données doivent être traitées en priorité.      |
 | **ACK**         | Acknowledgment            | Indique que le champ **Acknowledgment Number** est valide. Sert à confirmer la réception de paquets.                |
@@ -33,26 +32,75 @@ A partir du Lab installé, ajouter les services nécessaires et répondre aux qu
 | **CWR**         | Congestion Window Reduced | Indique que l’émetteur a réduit sa fenêtre de congestion à cause d’une notification ECN.                            |
 | **NS**          | Nonce Sum                 | Utilisé pour vérifier l’intégrité de la gestion ECN (rarement utilisé).                                             |
 
-
 1. Capturer le processus `DORA` du protocole DHCP
 
-![Capture Wireshark](Images/DHCP.png)
+- ![Capture Wireshark](Images/DHCP.png)
 
 2. Qu’est ce que le `DHCP Starvation` / `snooping` ? `Rogue DHCP` ?
 
+- DHCP Starvation : attaque où un attaquant envoie massivement des DHCPDISCOVER (souvent avec des adresses MAC fictives) pour exhausser la table de baux du serveur DHCP et épuiser toutes les adresses disponibles → empêche les clients légitimes d’obtenir une adresse.
+
+- DHCP Snooping (fonction réseau) : fonctionnalité de switches qui filtre les messages DHCP pour ne permettre les réponses DHCP (Offers/ACKs) que depuis des ports de confiance (trusted ports) — bloque les réponses depuis ports non-trustés pour empêcher les serveurs DHCP non autorisés. Aussi construit une table DHCP binding (IP↔MAC↔port) utilisée par d’autres protections
+
+- Rogue DHCP : serveur DHCP malveillant ou mal configuré dans le réseau qui fournit de mauvaises informations (gateway DNS malicieux…) → redirection, interception, MITM.
+
 3. Que ce passe-t-il lors de l'execution de la commande `ipconfig /release` (windows) ? D’un point de vue sécurité quel peut etre l'enjeu ?
+
+- le client Windows envoie (si possible) un DHCPRELEASE au serveur DHCP pour libérer l’adresse et supprime l’adresse localement.
+
+***Enjeu de sécurité***
+
+- Un administrateur malveillant côté réseau pourrait forcer des clients à relâcher leurs adresses (ex. via commandes à distance, scripts, ou via attaque sur client), les forcer à renouveler et potentiellement attraper une nouvelle adresse avec post-configuration malveillante (si un rogue DHCP existe).
+
+- ipconfig /release n’est pas en soi dangereux, mais dans un réseau compromis il peut être exploité pour provoquer un déni de service local, ou pousser des clients vers un serveur DHCP rogue.
 
 4. Quelle fonctionnalité propose CISCO pour se prémunir des `attaques DHCP` ?
 
+- Cisco : implémente DHCP Snooping, ainsi que IP Source Guard et Dynamic ARP Inspection (DAI) qui tirent parti de la table DHCP-snooping pour empêcher usurpation d’IP/MAC et attaques ARP.
+
 5. Capturer une `requête DNS` et sa réponse
+
+***Requête DNS***
+
+- ![RequeteDNS](Images/DNS.png)
+ 
+***Reponse DNS***
+
+- ![ReponseDNS](Images/DNS_rep.png)
 
 6. Qu’est-ce que le `DNS Spoofing` ? Comment s’en protéger ?
 
+- L’usurpation de DNS est une cyberattaque par laquelle un pirate modifie les enregistrements DNS afin de rediriger le trafic d’un site web légitime vers un site frauduleux. Cela peut conduire au vol de données, à l’hameçonnage ou à l’installation de logiciels malveillants. Les attaquants exploitent les faiblesses des protocoles DNS ou utilisent l’empoisonnement du cache pour tromper les utilisateurs.
+
+***Protections***
+
+- DNSSEC (signature des zones) — vérifie intégrité/authenticité des réponses DNS (signatures RRSIG).
+
+- Utiliser DNS over TLS (DoT) ou DNS over HTTPS (DoH) entre client et résolveur pour chiffrer la requête au transit.
+
+- Utiliser résolveurs fiables, durcir et patcher serveurs DNS, monitoring (détecter réponses inattendues), limiter recursion pour serveurs publics, sécuriser accès aux résolveurs.
+
 7. Qu’est-ce que `DNSSec` ? `DNS over TLS` ou `DNS over HTTPS` ?
 
+- DNSSEC : ensemble d’extensions du DNS qui ajoutent des signatures numériques (RRsig) aux enregistrements DNS et une chaîne de confiance (via clés publiques) pour vérifier que la réponse n’a pas été altérée et provient bien de la zone signée. DNSSEC n’encrypte pas la requête, il assure authenticité et intégrité.
+
+- DNS over TLS (DoT) : DNS chiffré via TLS (port par défaut 853). Cible la confidentialité (protéger le contenu des requêtes DNS entre client et résolveur).
+
+- DNS over HTTPS (DoH) : DNS chiffré transporté sur HTTPS (généralement port 443). Avantage : passe facilement les proxys/firewalls, mais soulève des débat sur centralisation des résolveurs.
+
+
 8. Dans quels cas trouve-t-on du DNS sur TCP ?
+Le DNS utilise généralement le protocole UDP car les requêtes et les réponses sont petites et rapides, et UDP ne nécessite pas d'établissement de connexion, ce qui est efficace pour le trafic léger. Cependant, on trouve du DNS sur TCP dans certains cas spécifiques :
+
+- Quand la taille d'une réponse DNS dépasse la limite d'UDP (historique 512 octets, aujourd’hui souvent un peu plus grâce à EDNS), la réponse est tronquée en UDP et le client doit refaire la requête en TCP pour récupérer la réponse complète.
+
+- Pour les transferts de zone DNS entre serveurs DNS, qui impliquent l’envoi de gros volumes de données, TCP est systématiquement utilisé car il garantit la fiabilité et l'intégrité des données.
+
+- Si une requête DNS échoue en UDP (pas de réponse reçue), le client peut tenter une retransmission via TCP.
 
 9. Capturer un flux `HTTP`
+
+![HTTP](Images/HTTP.png)
 
 10. Qu’est-ce que le `HTTP Smuggling` ? Donner un exemple de `CVE`
 
@@ -86,66 +134,3 @@ A partir du Lab installé, ajouter les services nécessaires et répondre aux qu
 
 > [!TIP]
 > Bonus : **Déchiffrer le traffic TLS** en important la clé privée du certificat dans Wireshark et **reconstituer le fichier** qui à transité sur le réseau à l'aide de Wireshark
-
-
-
-### Reponses Rappels
-
-* Quelle est votre adresse IP ? Quelle est sa classe (IPv4) ?  `192.168.0.11  classe C`
-
-* Quel est votre masque de sous-réseau ? `255.255.255.0`     
-
-* Quelle est l'adresse de votre passerelle ? `192.168.0.1`
-
-
-### Reponses
-
-0. 
-
-1. 
-
-2. 
-
-3. 
-
-4. 
-
-5. 
-
-6. 
-
-7. 
-
-8. 
-
-9. 
-
-10. 
-
-11. 
-
-12. 
-
-13. 
-
-14. 
-
-15. 
-
-16. 
-
-17. 
-
-18. 
-
-19. 
-
-20. 
-
-21. 
-
-22. 
-
-23. 
-
-24. 
