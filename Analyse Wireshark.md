@@ -191,6 +191,8 @@ Certificats valides délivrés par AC de confiance, renouvellement/rotation, OCS
 
 - ![SMB](Images/SMB.png)
 
+
+
 - ![SMB2](Images/SMB2png.png)
 
 ## 24. Comment proteger l'`authenticité` et la `confidentialité` d'un partage SMB ?
