@@ -181,7 +181,7 @@ Certificats valides délivrés par AC de confiance, renouvellement/rotation, OCS
 
 ## 21. Capturer une `authentification WinRM` (Vous pouvez utiliser EvilWinRM si nécessaire côté client.), quel est le protocole d'authentification capturé ?
 
-![WINRM](Images/WINRM.png)
+- ![WINRM](Images/WINRM.png)
 
 ## 22. Capturer une `authentification SSH` ou SFTP (mettre en place le service si nécessaire)
 
