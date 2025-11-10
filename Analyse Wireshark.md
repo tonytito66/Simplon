@@ -135,7 +135,17 @@ Certificats valides délivrés par AC de confiance, renouvellement/rotation, OCS
 
 ## 13. Capturer un `mot de passe` HTTP via le projet VulnerableLightApp.
 
+- Changement de MDP :
+
+![MDP](Images/vulmdp.png)
+
+- Capture :
+
+![Vulne](Images/Vulne.png)
+
 ## 14. Comment mettre en place la `confidentialité` pour ce service ?
+
+- Activer TLS (HTTPS) : obtenir un certificat valide et configurer le serveur pour servir l’app via HTTPS uniquement.
 
 ## 15. Capturer un `handshake TLS`
 
@@ -143,19 +153,53 @@ Certificats valides délivrés par AC de confiance, renouvellement/rotation, OCS
 
 ## 16. Qu’est-ce qu’une autorité de certification (`AC`) racine ? Qu'est qu'une `AC intermediaire` ?
 
+- Une autorité de certification (AC) racine est l’autorité la plus élevée et la plus fiable dans la hiérarchie des certificats numériques. Elle est auto-signée. Ce certificat racine est préinstallé dans les navigateurs web et systèmes d’exploitation, ce qui permet de leur faire automatiquement confiance. Les AC racines délivrent des certificats intermédiaires ou directement des certificats utilisateur, mais pour des raisons de sécurité, elles émettent rarement des certificats finaux directement.
+
+- Une autorité de certification intermédiaire est une AC située entre l’AC racine et les certificats finaux (utilisateurs ou serveurs). Elle est signée par l’AC racine ou par une autre AC intermédiaire supérieure, et elle a pour rôle de délégué l’émission des certificats. Cela permet de créer une chaîne de confiance : le certificat final est émis par une AC intermédiaire, qui elle-même est signée par l’AC racine. Cette architecture ajoute une couche de sécurité, car la clé privée de l’AC racine est protégée hors ligne, et en cas de compromission d’une AC intermédiaire, les conséquences sont contenues.
+
 ## 17. Connectez-vous sur `taisen.fr` et affichez la `chaine de confiance` du certificat
 
-## 18. Capturer une authentification `Kerberos` (mettre en place le service si nécessaire), identifier l'`AS_REQ`, `AS_REP` et les messages suivants.
+- ![Certificat](Images/Certificat.png)
+
+## 18. Capturer une authentification `Kerberos` (mettre en place le service si nécessaire), identifier l'`AS_REQ`, `AS_REP` et les messages suiv
+
+- ![Kerberos](Images/Kerberos.png)
 
 ## 19. Capturer une `authentification RDP` (mettre en place le service si nécessaire), quel est le protocole d'authentification capturé ?
 
+- ![RDP](Images/RDP.png)
+
 ## 20. Quelles sont les attaques connues sur `NetLM` ?
+
+- Faible résistance aux bruteforce (algorithme old, salage/complexité insuffisants).
+
+- Pass-the-hash (PtH) : réutilisation du hash NTLM/LM pour s'authentifier sans connaître le mot de passe.
+
+- Relay attacks / NTLM relay : relayer des authentifications NTLM vers d’autres services.
+
+- Brute-force / rainbow tables pour LM (LM découpe le mot de passe en deux moitiés et le rends très vulnérable).
 
 ## 21. Capturer une `authentification WinRM` (Vous pouvez utiliser EvilWinRM si nécessaire côté client.), quel est le protocole d'authentification capturé ?
 
+- ![WinRM](Images/WINRM.png)
+
 ## 22. Capturer une `authentification SSH` ou SFTP (mettre en place le service si nécessaire)
+
+- ![SSH](Images/SSH.png)
 
 ## 23. Intercepter un `fichier au travers du protocole SMB`
 
+- ![SMB](Images/SMB.png)
+
+- ![SMB2](Images/SMB2png.png)
+
 ## 24. Comment proteger l'`authenticité` et la `confidentialité` d'un partage SMB ?
+
+- Activer SMB Signing (authenticité / intégrité) : empêche modification/relay des paquets.
+
+- Activer SMB Encryption (SMB3+) : chiffrement au niveau du protocole pour protéger la confidentialité des données en transit.
+
+- Utiliser Kerberos pour l’authentification (plutôt que NTLM).
+
+- Appliquer ACLs strictes, segmenter via VLANs, firewall, limiter partages publics, MFA pour l’accès à distance, surveillance et patching.
 
