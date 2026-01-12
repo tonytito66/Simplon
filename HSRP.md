@@ -26,6 +26,9 @@ R2 et R3 sont en ecoute si R1 coupe alors l'un des 2 prendra le relais pour assu
 
 - Noter les adresses IP virtuelles (VIP) et physiques (R1, R2, R3) utilisées dans les groupes HSRP, à quoi servent ces différentes adresses ?
 
+R1:172.30.128.254
+R2:92.60.150.1
+
 - Identifier les interfaces réseau participant à HSRP sur chaque routeur, leurs priorités, les délais et les autres paramètres HSRP configurés sur les routeurs. Que comprenez-vous ?
 Configuration HSRP
 
