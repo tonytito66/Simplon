@@ -5,7 +5,15 @@ Le but de cet exercice est d’effectuer une analyse de type « reverse engineer
 
 - Qu’est-ce que HSRP ? Proposer une définition simple.
 
+HSRP est un protocole Cisco qui permet à plusieurs routeurs de fonctionner ensemble dans un groupe,
+fournissant une adresse IP virtuelle (l'adresse de passerelle par défaut) qui est partagée entre eux.
+
 - Pourquoi utilise-t-on HSRP et quel problème résout-il ? Expliquer l'intérêt de HSRP dans ce réseau
+
+Cette technologie offre une passerelle par défaut virtuelle stable, assurant une transition transparente
+entre les routeurs actif et de secours en cas de besoin. 
+
+L'intérêt de HSRP dans ce réseau est d'avoir de la redondance
 
 ## Analyse de la configuration existante
 
