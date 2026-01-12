@@ -19,6 +19,8 @@ L'intérêt de HSRP dans ce réseau est d'avoir de la redondance
 
 - Identifier les routeurs primaires et les routeurs de secours HSRP, quels sont leurs rôles respectifs ?
 
+![R1](Images/HSRP1.png)
+
 - Noter les adresses IP virtuelles (VIP) et physiques (R1, R2, R3) utilisées dans les groupes HSRP, à quoi servent ces différentes adresses ?
 
 - Identifier les interfaces réseau participant à HSRP sur chaque routeur, leurs priorités, les délais et les autres paramètres HSRP configurés sur les routeurs. Que comprenez-vous ?
