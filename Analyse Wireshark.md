@@ -204,4 +204,3 @@ Certificats valides délivrés par AC de confiance, renouvellement/rotation, OCS
 - Utiliser Kerberos pour l’authentification (plutôt que NTLM).
 
 - Appliquer ACLs strictes, segmenter via VLANs, firewall, limiter partages publics, MFA pour l’accès à distance, surveillance et patching.
-
