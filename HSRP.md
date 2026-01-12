@@ -21,6 +21,9 @@ L'intérêt de HSRP dans ce réseau est d'avoir de la redondance
 
 ![R1](Images/HSRP1.png)
 
+R1 est le routeur principal celui qui fonctionne en premier
+R2 et R3 sont en ecoute si R1 coupe alors l'un des 2 prendra le relais pour assurer la continuité de services.
+
 - Noter les adresses IP virtuelles (VIP) et physiques (R1, R2, R3) utilisées dans les groupes HSRP, à quoi servent ces différentes adresses ?
 
 - Identifier les interfaces réseau participant à HSRP sur chaque routeur, leurs priorités, les délais et les autres paramètres HSRP configurés sur les routeurs. Que comprenez-vous ?
