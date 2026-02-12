@@ -58,7 +58,7 @@ Le SMSI est un **cadre de gestion** complet (basé sur la norme ISO 27001). C'es
 * **L'équivalent :** C'est le **"Système de Pilotage"** (comme un tableau de bord d'avion).
 
 ### Tableau comparatif
-
+![iso](Images/iso.png)
 
 ### En résumé
 
