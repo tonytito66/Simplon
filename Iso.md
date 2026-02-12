@@ -59,7 +59,6 @@ Le SMSI est un **cadre de gestion** complet (basé sur la norme ISO 27001). C'es
 
 ### Tableau comparatif
 
-![alt text](../Images/tableauiso.png)
 
 ### En résumé
 
