@@ -1,12 +1,41 @@
 # ***ANSIBLE***
 
+## **Sommaire**
+
+- [Livrable](#livrable)
+- [Installation Globale](#installation-globale)
+
+# Livrable
+
+### - Fichier d'inventaire
+
+![alt text](Images/inventory.png)
+
+### - Playbooks 1-update-os.yml
+
+![alt text](Images/Playbook1.png)
+
+### -  2-create-user.yml
+
+![alt text](Images/Playbook2.png)
+
+### - 3-deploy-website.yml
+
+![alt text](Images/Playbook3.png)
+
+### - Le fichier source de la page web (index.html)
+
+![alt text](Images/index_html.png)
+
+# Installation Globale
+
 ##  Prérequis de l'atelier Ansible 
 
 - Le Controller (Machine A) : Un système sous Ubuntu ou Debian (VM ou CT) où vous allez travailler.
 - La Cible (Machine B) : Un serveur sous Ubuntu ou Debian (VM ou CT), accessible par le réseau.
 - Accès SSH : Vous devez pouvoir vous connecter en SSH depuis le Controller vers la Cible (avec un utilisateur ayant les droits sudo ou root > `PermitRootLogin Yes` dans `/etc/ssh/sshd_config` de la Cible).
 
-## Étape 1 : Installation et préparation du Controller
+# Étape 1 : Installation et préparation du Controller
 L'objectif de cette étape est de mettre en place l'environnement de travail local.
 
 - Mettre à jour les paquets locaux et installer Ansible.
@@ -23,7 +52,7 @@ sudo apt install ansible -y
 mkdir ~/ansible-lab
 cd ~/ansible-lab
 ```
-## Étape 2 : L'inventaire, les prérequis et le "Ping" (La prise de contact)
+# Étape 2 : L'inventaire, les prérequis et le "Ping" (La prise de contact)
 
 Ansible a besoin de savoir à quelles machines il doit parler. Au lieu de modifier les fichiers globaux du système, nous allons utiliser les bonnes pratiques en créant un inventaire local. 
 
@@ -87,7 +116,7 @@ C'est l'heure du premier Playbook (fichier YAML). L'objectif est de s'assurer qu
 
 ![alt text](Images/test_playbook.png)
 
-## Étape 4 : Playbook 2 - Sécurité (Nouvel utilisateur et Clé SSH)
+# Étape 4 : Playbook 2 - Sécurité (Nouvel utilisateur et Clé SSH)
 
 - Créer un utilisateur manuellement prend du temps. Ansible peut le faire sur 100 serveurs en une seconde.
 - Action préalable : Générer une clé SSH sur son Controller s'il n'en a pas (ssh-keygen -t rsa -b 4096).
@@ -134,9 +163,29 @@ Créer votre second Playbook pour créer le nouveau user "devops" + une clef SSH
 
 ![alt text](Images/test_ssh_devops.png)
 
+# Etape 5 - Déployer NGINX + site demo
 
+https://www.digitalocean.com/community/tutorials/how-to-deploy-a-static-html-website-with-ansible-on-ubuntu-20-04-nginx
 
-# Creation de mot de passe avec Vault
+Lien du site: 
+
+`curl -L https://github.com/do-community/html_demo_site/archive/refs/heads/main.zip -o html_demo.zip`
+
+### Playbook 
+
+![alt text](Images/Playbook3.png)
+
+## Lancer le playbook
+
+`ansible-playbook -i inventory.ini 3-deploy-website.yml --ask-vault-pass -k`
+
+![alt text](Images/test-playbook_web.png)
+
+### Resultat site web
+
+![alt text](Images/Page_web.png)
+
+# Etape 6 - Creation de mot de passe avec Vault
 
 `ansible-vault create secrets.yml`
 
