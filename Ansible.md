@@ -8,8 +8,13 @@
 # Livrable
 
 ### - Fichier d'inventaire
+- Avant creation de l'user
 
 ![alt text](Images/inventory.png)
+
+- Apres Creation de l'user devops
+
+![alt text](Images/inventory_devops.png)
 
 ### - Playbooks 1-update-os.yml
 
@@ -26,6 +31,22 @@
 ### - Le fichier source de la page web (index.html)
 
 ![alt text](Images/index_html.png)
+
+
+### Utilisation des commandes pour lancer les playbooks.
+
+- Au debut en root avec le permitrootlogin yes
+
+```
+ansible-playbook -i inventory.ini 1-update-os.yml -k
+
+```
+- Une fois l'user cree avec les droits sudo, le mot de passe, et le vault fonctionnel.Mettre le Permitrootlogin no 
+
+```
+ansible-playbook -i inventory.ini -u devops 1-update-os.yml --ask-vault-pass -K
+
+ ```
 
 # Installation Globale
 
@@ -203,6 +224,19 @@ ansible-playbook -i inventory.ini 3-deploy-website.yml --ask-vault-pass -k
 
 ![alt text](Images/Page_web.png)
 
+- ### Modification du playbook pour utilisation avec vault et nouveau secret pour website
+
+![alt text](Images/playbook_devops2.png)
+
+- Lancement du playbook 
+
+```
+ansible-playbook -i inventory.ini -u devops 3-deploy-website.yml --ask-vault-pass -K
+
+```
+![alt text](Images/Playbook_devops.png)
+
+
 # Etape 6 - Ansible-Vault
 
 - ### Creation de mot de passe avec Vault
@@ -244,3 +278,5 @@ ansible-playbook -i inventory.ini 4-secret-devops.yml --ask-vault-pass -k
 ![alt text](Images/test_sudo_mdp_devops.png)
 
 ![alt text](Images/test1-update.png)
+
+
