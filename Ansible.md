@@ -185,7 +185,9 @@ Lien du site:
 
 ![alt text](Images/Page_web.png)
 
-# Etape 6 - Creation de mot de passe avec Vault
+# Etape 6 - Ansible-Vault
+
+- ### Creation de mot de passe avec Vault
 
 `ansible-vault create secrets.yml`
 
