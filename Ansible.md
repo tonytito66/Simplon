@@ -86,3 +86,84 @@ C'est l'heure du premier Playbook (fichier YAML). L'objectif est de s'assurer qu
 `ansible-playbook -i inventory.ini 1-update-os.yml -k`
 
 ![alt text](Images/test_playbook.png)
+
+## Étape 4 : Playbook 2 - Sécurité (Nouvel utilisateur et Clé SSH)
+
+- Créer un utilisateur manuellement prend du temps. Ansible peut le faire sur 100 serveurs en une seconde.
+- Action préalable : Générer une clé SSH sur son Controller s'il n'en a pas (ssh-keygen -t rsa -b 4096).
+
+
+⚠️ Si votre OS cible est sous Debian, passer la commande ansible ad-hoc pour installer sudo
+
+`ansible -i inventory.ini servers -m apt -a "name=sudo state=present update_cache=yes" -k`
+
+![alt text](Images/sudo.png)
+
+Créer votre second Playbook pour créer le nouveau user "devops" + une clef SSH + le passer sudoers
+
+`nano 2-create-user.yml`
+
+```
+---
+- name: Creation utilisateur et configuration SSH
+  hosts: serveurs_web
+  become: yes
+
+  tasks:
+    - name: Creer utilisateur devops avec un bash
+      user:
+        name: devops
+        shell: /bin/bash
+        groups: sudo
+        append: yes
+
+    - name: Ajouter la clee publique SSH pour devops
+      authorized_key:
+        user: devops
+        state: present
+        key: "{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
+```
+
+## Lancer le playbook
+
+`ansible-playbook -i inventory.ini 2-create-user.yml -k`
+
+![alt text](Images/user+ssh.png)
+
+### Test SSH devops
+
+![alt text](Images/test_ssh_devops.png)
+
+
+
+# Creation de mot de passe avec Vault
+
+`ansible-vault create secrets.yml`
+
+- ### Dans vim mettre 
+
+`secret_password_devops: "monmotdepasse" `
+
+- ### Pour cryter le fichier faire
+
+`ansible-vault encrypt secrets.yml`
+
+- ### Modifier le playbook 1-update-os.yml
+
+![alt text](Images/modif1-vault.png)
+
+- ### Creer un nouveau playbook 
+
+![alt text](Images/4-user+vault.png)
+
+- ### Test du playbook avec la commande
+
+`ansible-playbook -i inventory.ini 4-secret-devops.yml --ask-vault-pass -k `
+ 
+ ![alt text](Images/test_4_vault+user.png)
+
+- ### Test de sudo avec le MDP devops + test update avec vault
+
+![alt text](Images/test_sudo_mdp_devops.png)
+
+![alt text](Images/test1-update.png)
