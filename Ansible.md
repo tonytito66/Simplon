@@ -208,6 +208,10 @@ Lien du site:
 
 `curl -L https://github.com/do-community/html_demo_site/archive/refs/heads/main.zip -o html_demo.zip`
 
+### A quoi doit ressembler le dossier ansible-nginx-demo
+
+![alt text](Images/Dossier.png)
+
 ### Playbook 
 
 ![alt text](Images/Playbook3.png)
