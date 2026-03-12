@@ -62,15 +62,19 @@ De plus, comme nous n'avons pas encore configuré de clés SSH, nous allons util
 Pour qu'Ansible puisse injecter automatiquement un mot de passe lors de la connexion SSH (sans que SSH ne le bloque), le paquet sshpass est requis sur le Controller.
 
 ### Sur le Controller
-`sudo apt install sshpass -y`
+```
+sudo apt install sshpass -y
 
+```
 ## Action 2 : Créer l'inventaire
 
 - Créer un fichier nommé `inventory.ini` dans le dossier `ansible-lab`.
 - Y ajouter l'adresse IP du serveur cible et spécifier l'utilisateur de connexion.
 
-`nano /root/ansible-lab/inventory.ini`
+```
+nano /root/ansible-lab/inventory.ini
 
+```
 ```
 [serveurs_web]
 IP_DE_VOTRE_SERVEUR_CIBLE ansible_user=votre_utilisteur_ssh
@@ -84,8 +88,9 @@ IP_DE_VOTRE_SERVEUR_CIBLE ansible_user=votre_utilisteur_ssh
 ## Le Test (Ping) :
 Pour lancer le test, nous ajoutons l'option -k (minuscule) à la commande. Cela indique à Ansible de vous demander le mot de passe SSH de l'utilisateur cible avant de lancer l'action.
 
-`ansible -i inventory.ini serveurs_web -m ping -k`
-
+```
+ansible -i inventory.ini serveurs_web -m ping -k
+```
 *(Ansible affichera SSH password:, tapez le mot de passe de votre utilisateur cible).*
 
 ![alt text](Images/Ping.png)
@@ -96,8 +101,10 @@ C'est l'heure du premier Playbook (fichier YAML). L'objectif est de s'assurer qu
 
 - Créer un fichier 1-update-os.yml et y insérer le code suivant. Observez l'indentation, elle est stricte en YAML !
 
-`nano 1-update-os.yml`
+```
+nano 1-update-os.yml
 
+```
 ```
 ---
 - name: Udpate OS
@@ -112,8 +119,10 @@ C'est l'heure du premier Playbook (fichier YAML). L'objectif est de s'assurer qu
 ```
 ## Executer votre 1er Playbook
 
-`ansible-playbook -i inventory.ini 1-update-os.yml -k`
+```
+ansible-playbook -i inventory.ini 1-update-os.yml -k
 
+```
 ![alt text](Images/test_playbook.png)
 
 # Étape 4 : Playbook 2 - Sécurité (Nouvel utilisateur et Clé SSH)
@@ -124,14 +133,19 @@ C'est l'heure du premier Playbook (fichier YAML). L'objectif est de s'assurer qu
 
 ⚠️ Si votre OS cible est sous Debian, passer la commande ansible ad-hoc pour installer sudo
 
-`ansible -i inventory.ini servers -m apt -a "name=sudo state=present update_cache=yes" -k`
+```
 
+ansible -i inventory.ini servers -m apt -a "name=sudo state=present update_cache=yes" -k
+
+```
 ![alt text](Images/sudo.png)
 
 Créer votre second Playbook pour créer le nouveau user "devops" + une clef SSH + le passer sudoers
 
-`nano 2-create-user.yml`
+```
+nano 2-create-user.yml
 
+```
 ```
 ---
 - name: Creation utilisateur et configuration SSH
@@ -155,8 +169,10 @@ Créer votre second Playbook pour créer le nouveau user "devops" + une clef SSH
 
 ## Lancer le playbook
 
-`ansible-playbook -i inventory.ini 2-create-user.yml -k`
+```
+ansible-playbook -i inventory.ini 2-create-user.yml -k
 
+```
 ![alt text](Images/user+ssh.png)
 
 ### Test SSH devops
@@ -177,8 +193,10 @@ Lien du site:
 
 ## Lancer le playbook
 
-`ansible-playbook -i inventory.ini 3-deploy-website.yml --ask-vault-pass -k`
+```
+ansible-playbook -i inventory.ini 3-deploy-website.yml --ask-vault-pass -k
 
+```
 ![alt text](Images/test-playbook_web.png)
 
 ### Resultat site web
@@ -189,16 +207,22 @@ Lien du site:
 
 - ### Creation de mot de passe avec Vault
 
-`ansible-vault create secrets.yml`
+```
+ansible-vault create secrets.yml
 
+```
 - ### Dans vim mettre 
 
-`secret_password_devops: "monmotdepasse" `
+```
+secret_password_devops: "monmotdepasse"
 
+```
 - ### Pour cryter le fichier faire
 
-`ansible-vault encrypt secrets.yml`
+```
+ansible-vault encrypt secrets.yml
 
+```
 - ### Modifier le playbook 1-update-os.yml
 
 ![alt text](Images/modif1-vault.png)
@@ -209,8 +233,10 @@ Lien du site:
 
 - ### Test du playbook avec la commande
 
-`ansible-playbook -i inventory.ini 4-secret-devops.yml --ask-vault-pass -k `
- 
+```
+ansible-playbook -i inventory.ini 4-secret-devops.yml --ask-vault-pass -k
+
+``` 
  ![alt text](Images/test_4_vault+user.png)
 
 - ### Test de sudo avec le MDP devops + test update avec vault
