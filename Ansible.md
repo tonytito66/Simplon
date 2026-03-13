@@ -44,7 +44,7 @@ ansible-playbook -i inventory.ini 1-update-os.yml -k
 - Une fois l'user cree avec les droits sudo, le mot de passe, et le vault fonctionnel.Mettre le Permitrootlogin no 
 
 ```
-ansible-playbook -i inventory.ini -u devops 1-update-os.yml --ask-vault-pass -K
+ansible-playbook -i inventory.ini 1-update-os.yml --ask-vault-pass
 
  ```
 
