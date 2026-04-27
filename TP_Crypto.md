@@ -148,7 +148,7 @@ qxFGHeJU7QeLECubCr8QRYn78KcD87pXutJrtOItTGzbbUtSx28SCJuUYnME65HY
 
 - Quelles sont les tailles des hashs produits ?
 
-- Est-il possible de retrouver le mot de passe à partir du hash ? Non
+- Est-il possible de retrouver le mot de passe à partir du hash ? Oui
 - Essayez deux textes légèrement différents (TEST et TESt)
 - Que constatez-vous dans les résultats des hashs ? ils sont changer
 - Hacher le texte « hello » en SHA1 (80 rounds) : aaf4c61ddcc5e8a2dabede0f3b482cd9aea9434d
