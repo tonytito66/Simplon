@@ -137,6 +137,8 @@ qxFGHeJU7QeLECubCr8QRYn78KcD87pXutJrtOItTGzbbUtSx28SCJuUYnME65HY
 - Votre binôme, doit déchiffrer le message à l’aide de sa clé privée pour découvrir votre réplique préférée
 - Inversez ensuite les rôles pour que chacun connaisse la réplique privée de son binôme
 
+### **Nicolas**
+
 ![alt text](Images/Crypto/RSA_decrypt_Nico.png)
 
 
