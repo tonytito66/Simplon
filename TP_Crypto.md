@@ -155,7 +155,7 @@ qxFGHeJU7QeLECubCr8QRYn78KcD87pXutJrtOItTGzbbUtSx28SCJuUYnME65HY
 - Crackez le hash sur https://crackstation.net/
 - Le hash est cracké en quelques secondes, comment cela est-ce possible ? Car il fait parti d'une liste , du coup le hash est deja connu 
 - Répéter le point précédent avec SHA1 (50 rounds)
-- Le hash est-il cracké ? Pourquoi ? Non il n'est pas cracké car il ne reconnais pas le hash dans sa lite
+- Le hash est-il cracké ? Pourquoi ? Non il n'est pas cracké car il ne reconnais pas le hash dans sa liste car les parametres de chiffrement on changer .
 
 # Partie 6 : Encodage
 - Encodez le mot « Bonjour » en base 64
