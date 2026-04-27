@@ -150,9 +150,19 @@ qxFGHeJU7QeLECubCr8QRYn78KcD87pXutJrtOItTGzbbUtSx28SCJuUYnME65HY
 
 - Quelles sont les tailles des hashs produits ?
 
+SHA-1	    160 bits
+
+SHA-256	    256 bits
+
+SHA-512	    512 bits
+
+SHA3-256	256 bits
+
+SHA3-512	512 bits	
+
 - Est-il possible de retrouver le mot de passe à partir du hash ? Oui
 - Essayez deux textes légèrement différents (TEST et TESt)
-- Que constatez-vous dans les résultats des hashs ? ils sont changer
+- Que constatez-vous dans les résultats des hashs ? ils ont changer
 - Hacher le texte « hello » en SHA1 (80 rounds) : aaf4c61ddcc5e8a2dabede0f3b482cd9aea9434d
 - Crackez le hash sur https://crackstation.net/
 - Le hash est cracké en quelques secondes, comment cela est-ce possible ? Car il fait parti d'une liste , du coup le hash est deja connu 
