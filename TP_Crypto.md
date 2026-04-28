@@ -1,4 +1,6 @@
-# Partie 1 : Chiffrement de César
+# TP1 Cyber Chef
+
+## Partie 1 : Chiffrement de César
 
 Dans « CyberChef » utilisez la recette « ROT13 »
 
@@ -10,7 +12,7 @@ Dans « CyberChef » utilisez la recette « ROT13 »
 
 - Déchiffrez ce texte pour vérifier le résultat
 
-![alt text](Images/Crypto/ROT13.png)
+![alt text](Images/Crypto_cyberchef/ROT13.png)
 
 
 2. Chiffrer le nom de votre film préféré avec une « Box Height » de votre choix
@@ -23,9 +25,9 @@ Dans « CyberChef » utilisez la recette « ROT13 »
 
 ### **Nicolas**
 
-![alt text](Images/Crypto/Rot25_Nico.png)
+![alt text](Images/Crypto_cyberchef/Rot25_Nico.png)
 
-# Partie 2 : Vigenère
+## Partie 2 : Vigenère
 
 Dans « CyberChef » utilisez la recette « Vigenère Encode »
 
@@ -46,9 +48,9 @@ respectifs
 
 ### **Nicolas**
 
-![alt text](Images/Crypto/Nico_Vigenere.png)
+![alt text](Images/Crypto_cyberchef/Nico_Vigenere.png)
 
-# Partie 3 : Chiffrement symétrique AES
+## Partie 3 : Chiffrement symétrique AES
 
 Dans « CyberChef » utilisez les recettes « AES Encrypt » et « AES Decrypt »
 
@@ -63,12 +65,12 @@ Découverte
 - Que constatez-vous si vous modifiez 1 caractère du texte initial ?
    - la sortie change
 
-   ![alt text](Images/Crypto/AES_Encrypt.png)
+  ![alt text](Images/Crypto_cyberchef/AES_Encrypt.png) 
 
 - Déchiffrez le texte AES chiffré précédemment en adaptant les paramètres
 - Vous devez retrouver le texte d'origine
 
-![alt text](Images/Crypto/AES_Decrypt.png)
+![alt text](Images/Crypto_cyberchef/AES_Decrypt.png)
 
 - Transmission d’un message chiffré à votre binôme
    - Générer une clé adéquate
@@ -80,7 +82,7 @@ Découverte
    - Output : Hex
    - Texte a dechiffre : 374654dbf76524cb1078a958ab3bcd14
 
-![alt text](Images/Crypto/AES_Encrypt_club.png)
+![alt text](Images/Crypto_cyberchef/AES_Encrypt_club.png)
 
 - Transmettre le texte chiffré à votre binôme
 - Transmettre la clé à votre binôme par un autre canal
@@ -91,7 +93,7 @@ Découverte
 
 ![alt text](Images/Crypto/Nico_AES.png)
 
-# Partie 4 : RSA
+## Partie 4 : RSA
 
 Dans « CyberChef » utilisez les recettes « Generate RSA Key Pair » « RSA Encrypt » et « RSA Decrypt »
 
@@ -116,7 +118,7 @@ Découverte
    - Utilisez votre clé privée pour déchiffrer le message
    - La sortie est-elle identique au message d’origine ? Oui
 
-   ![alt text](Images/Crypto/RSA_Decrypt.png)
+  ![alt text](Images/Crypto_cyberchef/RSA_Decrypt.png)
 
 Transmission d’un message chiffré à votre binôme
 
@@ -139,10 +141,10 @@ qxFGHeJU7QeLECubCr8QRYn78KcD87pXutJrtOItTGzbbUtSx28SCJuUYnME65HY
 
 ### **Nicolas**
 
-![alt text](Images/Crypto/RSA_decrypt_Nico.png)
+![alt text](Images/Crypto_cyberchef/RSA_decrypt_Nico.png)
 
 
-# Partie 5 : Hachage
+## Partie 5 : Hachage
 - Utilisez différents algorithmes de hachage sur la chaîne ADMIN123
    - SHA-1 93a6682a45cca19a71a8c9e3015e0c4b3a80e22c
    - SHA-2 : 256, 512 5b40171489659251097e7790fc2f1892e2183a72546fe1df283d07865db9149c , 25974977f6b51e4e8707e78281ba9b19ec54357901d51383658c57e3747d72a2fe00b3bb2e20d310cbbe1c49a0b6bb71df9f047a6253875041ea567bc85b2fcd
@@ -169,27 +171,121 @@ SHA3-512	512 bits
 - Répéter le point précédent avec SHA1 (50 rounds)
 - Le hash est-il cracké ? Pourquoi ? Non il n'est pas cracké car il ne reconnais pas le hash dans sa liste car les parametres de chiffrement on changer .
 
-# Partie 6 : Encodage
+## Partie 6 : Encodage
 - Encodez le mot « Bonjour » en base 64
    - Que représente le résultat ? Qm9uam91cg==
 
-   ![alt text](Images/Crypto/EncodeB64.png)
+ ![alt text](Images/Crypto_cyberchef/EncodeB64.png) 
 
 - Décoder le résultat obtenu précédemment
 
-![alt text](Images/Crypto/DeccodeB64.png)
+![alt text](Images/Crypto_cyberchef/DeccodeB64.png)
 
 - Peut-on confondre encodage et chiffrement ? Pourquoi ? Non le chiffrement necessite une clé alors que l'encodage non 
 
-# Bonus
+## Bonus
 - Le diaporama contient un message caché, tentez de le découvrir !
 - Indice : plusieurs opérations utilisées dans le cadre de ce TP ont été utilisées pour cacher ce message…
 
-![alt text](Images/Crypto/Bonus1.png)
+![alt text](Images/Crypto_cyberchef/Bonus1.png)
 
-![alt text](Images/Crypto/Bonus2.png)
+![alt text](Images/Crypto_cyberchef/Bonus2.png)
 
-![alt text](Images/Crypto/Bonus3.png)
+![alt text](Images/Crypto_cyberchef/Bonus3.png)
 
 - Avec le Hash en MD5
-![alt text](Images/Crypto/Bonus.png)
+
+![alt text](Images/Crypto_cyberchef/Bonus.png)
+
+# TP2 AES et RSA avec Open SSL
+
+## Partie 1 : Chiffrement symétrique AES
+
+**En utilisant OpenSSL**
+
+### A.Découverte
+
+
+
+- Chiffrez la chaîne 'TESTSECRET1234567' avec les paramètres suivants
+   - Mode de chiffrement AES 256 bits en CBC
+   - Sortie en base64
+   - Ajouter un sel (salt) pour sécuriser la dérivation de clé
+   - Fournir une passphrase (pour dériver la clé)
+
+   ```
+   echo -n "TESTSECRET1234567" | openssl enc -aes-256-cbc -salt -pbkdf2 -base64 -pass pass:"lacryptocestgenial"
+   ```
+
+   ![alt text](Images/CryptoAES/CMD_chiffrement_test.png)
+
+- Quelle est la clé réelle utilisée et comment est-elle générée ?
+
+![alt text](Images/CryptoAES/CMD_key.png)
+
+La clé réelle utilisée et la "KEY" et elle est générée automatiquement
+
+- Déchiffrez le texte AES chiffré précédemment en adaptant les paramètres
+
+```
+echo "U2FsdGVkX18nFqDyPVPnJ+TCOGjlQKwpHZltFp0EqpSXrSpkTbHGTrloh/W2IvhF" | openssl enc -d -aes-256-cbc -pbkdf2 -base64 -pass pass:"lacryptocestgenial"
+```
+   - Vous devez retrouver le texte d'origine
+
+### B. Transmission d’un message chiffré à votre binôme (passphrase)
+
+
+```
+root@CT-Maitre:~# echo -n "je m'en fou des voitures" | openssl enc -aes-256-cbc  -pbkdf2 -base64 -pass pass:"vroumvroum"
+```
+- Chiffrez le nom de votre voiture préférée avec les paramètres suivants
+   - Mode de chiffrement AES 256 bits en CBC
+   - Sortie en base64
+   - Ne pas ajouter de sel (salt) pour sécuriser la dérivation de clé
+   - Fournir une passphrase (pour dériver la clé)
+
+![alt text](Images/CryptoAES/CMD_chiffrement_voiture.png)
+
+- Transmettre le texte chiffré à votre binôme
+- Transmettre la passphrase à votre binôme par un autre canal
+
+- Au sein de votre binôme, déchiffrez le message pour découvrir vos voitures
+préférées respectives
+
+#### **Nicolas**
+
+![alt text](Images/CryptoAES/Resulat_Nico_voiture.png)
+
+### C.Transmission d’un message chiffré à votre binôme
+
+- Générez une clé de chiffrement et un vecteur d'initialisation (IV) à partir d’une passphrase sans
+sel
+
+```
+openssl enc -aes-256-cbc -nosalt -pbkdf2 -P -pass pass:"musique"
+```
+
+   - Notez les valeurs renvoyées
+
+ ![alt text](Images/CryptoAES/CMD_Chiff_musique.png)  
+
+- Chiffrez le nom de votre chanson préférée en utilisant la clé et l’IV générés précédemment
+```
+echo -n "Bohemian Rhapsody" | openssl enc -aes-256-cbc -base64 -K E100B969CE2D970B63B4E2FEFBA0864765E1BCB615CE1BA8A9D45DB256F5EBCC -iv 906B2632BE8855E64663181580356E23
+```
+
+![alt text](Images/CryptoAES/CMD_Chiff_musique2.png)
+
+- Transmettre le texte chiffré à votre binôme
+- Transmettre la clé et l’IV à votre binôme par un autre canal
+
+   - Au sein de votre binôme, déchiffrez le message pour découvrir votre chanson
+préférée respective
+
+```
+echo "yPU9P+3CQT+wDvK2P79ETRdXeeOnChn224hpXHtItks=" | openssl enc -d -aes-256-cbc -base64 -K E20458E08464955B200E6F07F79E87993AA11DAF97B5CBABFB3ADB6A9144F5E3 -iv 1E67EC9C18ED0FF43B9B597DF57DE86B
+```
+
+#### **Nicolas**
+
+![alt text](Images/CryptoAES/Resultat_Nico_2.png)
