@@ -532,3 +532,164 @@ ssh-add $env:USERPROFILE\.ssh\id_rsa_VM_ansible
 - Vous devez cracker les différents fichiers mis à votre disposition
 
 - Utiliser pour cela John The Ripper et la wordlist « RockYou »
+
+- Pour chaque hash je vais utiliser le script .py pour s'avoir quelle format de hash est utilisé.
+
+```bash
+python3 hash-id.py
+```
+![alt text](Images/CryptoRockYou/Script.py.png)
+
+##  Crack du hash1.txt (MD5)
+
+### Commande utilisée
+```bash
+./john --format=raw-md5 --wordlist=/root/rockyou.txt "/root/TP4-RockYouJohn/1-Basic Hashes/hash1.txt"
+```
+
+### Résultat obtenu
+```
+biscuit
+```
+![alt text](Images/CryptoRockYou/hash1.png)
+
+##  Crack du hash2.txt (SHA1)
+
+### Commande utilisée
+```bash
+./john --format=raw-sha1 --wordlist=~/rockyou.txt "/root/TP4-RockYouJohn/1-Basic Hashes/hash2.txt"
+```
+
+### Résultat obtenu
+```
+kangeroo
+```
+![alt text](Images/CryptoRockYou/hash2.png)
+
+##  Crack du hash3.txt (SHA256)
+
+### Commande utilisée
+```bash
+./john --format=raw-sha256 --wordlist=/root/rockyou.txt "/root/TP4-RockYouJohn/1-Basic Hashes/hash3.txt"
+```
+
+### Résultat obtenu
+```
+microphone
+```
+![alt text](Images/CryptoRockYou/hash3.png)
+
+##  Crack du hash4.txt (Whirlpool)
+
+### Commande utilisée
+```bash
+./john --format=whirlpool --wordlist=/root/rockyou.txt --rules "/root/TP4-RockYouJohn/1-Basic Hashes/hash4.txt"
+```
+
+### Résultat obtenu
+```
+colossal
+```
+![alt text](Images/CryptoRockYou/hash4.png)
+
+##  Crack du ntlm.txt
+
+### Commande utilisée
+```bash
+./john --format=nt --wordlist=/root/rockyou.txt  /root/TP4-RockYouJohn/2-Windows\ Authentication\ Hashes/ntlm.txt
+```
+
+### Résultat obtenu
+```
+mushroom
+```
+![alt text](Images/CryptoRockYou/ntlm.png)
+
+##  Crack du shadow
+
+### Commande utilisée
+
+```bash
+cd "/root/TP4-RockYouJohn/3-Shadow Hashes"
+~/john/run/unshadow local_passwd local_shadow > unshadowed.txt
+```
+Puis
+
+```bash
+cd ~/john/run
+./john --wordlist=/root/rockyou.txt "/root/TP4-RockYouJohn/3-Shadow Hashes/unshadowed.txt"
+```
+### Résultat obtenu
+```
+1234 (root)
+```
+![alt text](Images/CryptoRockYou/shadow.png)
+
+##  Crack du hash07.txt (MD5)
+
+### Commande utilisée
+
+```bash
+./john --format=raw-md5 --wordlist=/root/rockyou.txt --rules /root/TP4-RockYouJohn/4-Single\ Crack/hash07.txt
+```
+*On rajoute "-- rules" cela permet de modifier automatiquement les mots du dictionnaire pour tester des variantes.*
+
+### Résultat obtenu
+```
+Jok3r
+```
+![alt text](Images/CryptoRockYou/hash7.png)
+
+##  Crack du secure.zip
+
+### Commande utilisée
+
+```bash
+~/john/run# ./zip2john "/root/TP4-RockYouJohn/5-Zip File/secure.zip" > zip.hash
+```
+Puis
+
+```bash
+./john --wordlist=/root/rockyou.txt zip.hash
+```
+### Résultat obtenu
+```
+pass123
+```
+![alt text](Images/CryptoRockYou/Zip.png)
+
+##  Crack du secure.rar
+
+### Commande utilisée
+
+```bash
+./rar2john /root/TP4-RockYouJohn/6-RAR\ File/secure.rar > rar.hash
+```
+Puis
+
+```bash
+./john --wordlist=/root/rockyou.txt rar.hash
+```
+### Résultat obtenu
+```
+password
+```
+![alt text](Images/CryptoRockYou/rar.png)
+
+##  Crack du id.rsa (SSH)
+
+### Commande utilisée
+
+```bash
+python3 ./ssh2john.py "/root/TP4-RockYouJohn/7-SSH Key/id_rsa" > ssh.hash
+```
+Puis
+
+```bash
+./john --wordlist=/root/rockyou.txt ssh.hash
+```
+### Résultat obtenu
+```
+mango
+```
+![alt text](Images/CryptoRockYou/ssh.png)
