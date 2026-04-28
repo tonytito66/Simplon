@@ -91,7 +91,7 @@ Découverte
 
 ### **Nicolas**
 
-![alt text](Images/Crypto/Nico_AES.png)
+![alt text](Images/Crypto_cyberchef/Nico_AES.png)
 
 ## Partie 4 : RSA
 
@@ -213,9 +213,9 @@ SHA3-512	512 bits
    - Ajouter un sel (salt) pour sécuriser la dérivation de clé
    - Fournir une passphrase (pour dériver la clé)
 
-   ```
-   echo -n "TESTSECRET1234567" | openssl enc -aes-256-cbc -salt -pbkdf2 -base64 -pass pass:"lacryptocestgenial"
-   ```
+ ```bash
+echo -n "TESTSECRET1234567" | openssl enc -aes-256-cbc -salt -pbkdf2 -base64 -pass pass:"lacryptocestgenial"
+```
 
    ![alt text](Images/CryptoAES/CMD_chiffrement_test.png)
 
@@ -227,7 +227,7 @@ La clé réelle utilisée et la "KEY" et elle est générée automatiquement
 
 - Déchiffrez le texte AES chiffré précédemment en adaptant les paramètres
 
-```
+```bash
 echo "U2FsdGVkX18nFqDyPVPnJ+TCOGjlQKwpHZltFp0EqpSXrSpkTbHGTrloh/W2IvhF" | openssl enc -d -aes-256-cbc -pbkdf2 -base64 -pass pass:"lacryptocestgenial"
 ```
    - Vous devez retrouver le texte d'origine
@@ -235,7 +235,7 @@ echo "U2FsdGVkX18nFqDyPVPnJ+TCOGjlQKwpHZltFp0EqpSXrSpkTbHGTrloh/W2IvhF" | openss
 ### B. Transmission d’un message chiffré à votre binôme (passphrase)
 
 
-```
+```bash
 root@CT-Maitre:~# echo -n "je m'en fou des voitures" | openssl enc -aes-256-cbc  -pbkdf2 -base64 -pass pass:"vroumvroum"
 ```
 - Chiffrez le nom de votre voiture préférée avec les paramètres suivants
@@ -261,7 +261,7 @@ préférées respectives
 - Générez une clé de chiffrement et un vecteur d'initialisation (IV) à partir d’une passphrase sans
 sel
 
-```
+```bash
 openssl enc -aes-256-cbc -nosalt -pbkdf2 -P -pass pass:"musique"
 ```
 
@@ -270,7 +270,7 @@ openssl enc -aes-256-cbc -nosalt -pbkdf2 -P -pass pass:"musique"
  ![alt text](Images/CryptoAES/CMD_Chiff_musique.png)  
 
 - Chiffrez le nom de votre chanson préférée en utilisant la clé et l’IV générés précédemment
-```
+```bash
 echo -n "Bohemian Rhapsody" | openssl enc -aes-256-cbc -base64 -K E100B969CE2D970B63B4E2FEFBA0864765E1BCB615CE1BA8A9D45DB256F5EBCC -iv 906B2632BE8855E64663181580356E23
 ```
 
@@ -282,10 +282,248 @@ echo -n "Bohemian Rhapsody" | openssl enc -aes-256-cbc -base64 -K E100B969CE2D97
    - Au sein de votre binôme, déchiffrez le message pour découvrir votre chanson
 préférée respective
 
-```
+```bash
 echo "yPU9P+3CQT+wDvK2P79ETRdXeeOnChn224hpXHtItks=" | openssl enc -d -aes-256-cbc -base64 -K E20458E08464955B200E6F07F79E87993AA11DAF97B5CBABFB3ADB6A9144F5E3 -iv 1E67EC9C18ED0FF43B9B597DF57DE86B
 ```
 
 #### **Nicolas**
 
 ![alt text](Images/CryptoAES/Resultat_Nico_2.png)
+
+
+## Partie 2 : RSA
+
+En vous inspirant de l’exercice AES, réalisez l’équivalent avec RSA :
+
+### A. Génération de la paire de clés RSA
+
+- Générez une paire de clés RSA de 2048 bits
+
+```bash
+openssl genpkey -algorithm RSA -out private_key.pem -pkeyopt rsa_keygen_bits:2048
+```
+
+- Extraire la clé publique
+
+```bash
+openssl pkey -in private_key.pem -pubout -out public_key.pem
+```
+
+![alt text](Images/CryptoAES/Generate_RSA.png)
+
+### B. Chiffrement d’un message
+
+- Écrivez un court message (ex. : le nom de votre destination de tourisme préférée)
+
+```bash
+echo -n "MESSAGE" > message.txt
+```
+
+- Chiffrez-le avec la clé publique de votre binôme
+
+```bash
+openssl pkeyutl -encrypt -pubin -inkey public_key_binome.pem -in message.txt -out message_rsa.bin
+```
+
+![alt text](Images/CryptoAES/Generate_RSA_message.png)
+
+### C. Échange et déchiffrement
+
+- Transmettez le fichier chiffré (message_rsa.bin) à votre binôme.
+- Votre binôme doit déchiffrer le message avec sa clé privée
+
+![alt text](Images/CryptoAES/Nico_message_RSA.png)
+
+## Partie 3 : BONUS
+
+- Utilisez le chiffrement hybride pour transmettre à votre binôme les paroles de votre chanson préférée !
+
+Le chiffrement hybride combine :
+- **AES** → pour chiffrer les données (rapide)
+- **RSA** → pour chiffrer la clé AES (sécurisé)
+
+## 1. Génération des clés RSA (binôme)
+
+```bash
+openssl genpkey -algorithm RSA -out private_key.pem -pkeyopt rsa_keygen_bits:2048
+openssl pkey -in private_key.pem -pubout -out public_key.pem
+```
+
+
+## 2. Génération clé AES + IV
+
+```bash
+openssl rand -hex 32 > aes_key.hex
+openssl rand -hex 16 > aes_iv.hex
+```
+
+
+## 3. Chiffrement des données (AES-256-CBC)
+
+```bash
+openssl enc -aes-256-cbc -in paroles.txt -out paroles_chiffrees.bin \
+-K $(cat aes_key.hex) -iv $(cat aes_iv.hex)
+```
+![alt text](Images/CryptoAES/Bonus1.png)
+
+## 4. Chiffrement de la clé AES (RSA)
+
+```bash
+openssl pkeyutl -encrypt -pubin -inkey public_key_binome.pem \
+-in aes_key.hex -out aes_key_chiffree.bin
+```
+
+
+
+## 5. Transmission
+
+Envoyer au binôme :
+
+- `paroles_chiffrees.bin`
+- `aes_key_chiffree.bin`
+- `aes_iv.hex`
+
+![alt text](Images/CryptoAES/Bonus2.png)
+
+## 6. Déchiffrement de la clé AES (RSA)
+
+```bash
+openssl pkeyutl -decrypt -inkey private_key.pem \
+-in aes_key_chiffree.bin -out aes_key_dechiffree.hex
+```
+
+
+## 7. Déchiffrement des données (AES)
+
+```bash
+openssl enc -d -aes-256-cbc -in paroles_chiffrees.bin \
+-out paroles_dechiffrees.txt \
+-K $(cat aes_key_dechiffree.hex) -iv $(cat aes_iv.hex)
+```
+## 8. Lecture des paroles
+
+```bash
+cat paroles_dechiffrees.txt
+```
+
+#### **Nicolas**
+
+![alt text](Images/CryptoAES/Nico_parole.png)
+
+# TP3 SSH
+
+## Partie1 : Configuration initiale
+
+**Génération de la clé SSH**
+
+- Générer une paire de clé RSA 4096
+
+```bash
+ssh-keygen -t rsa -b 4096 -C
+```
+![alt text](Images/Crypto_SSH/Generatekey.png)
+
+   - Deux fichiers doivent être générés :
+     - id_rsa (clé privée, à ne pas partager)
+     - id_rsa.pub (clé publique)
+
+![alt text](Images/Crypto_SSH/Generatekey2.png)
+
+
+- Dépôt de la clé publique dans le serveur distant
+
+```bash
+scp ~/.ssh/id_rsa_VM_ansible.pub root@192.168.1.13:~
+```
+![alt text](Images/Crypto_SSH/Import_keyssh_serveur.png)
+
+   - Copier `id_rsa.pub` dans le home de l'utilisateur
+   - Déplacer la clé à l'emplacement correct et ajuster les droits (créer les dossiers nécessaires
+le cas échéant)
+
+```bash
+cat ~/id_rsa_VM_ansible.pub >> ~/.ssh/authorized_keys
+chmod 700 ~/.ssh
+chmod 600 ~/.ssh/authorized_keys
+```
+![alt text](Images/Crypto_SSH/Copie_keyssh_serveur.png)
+
+- Configuration du serveur pour forcer l’authentification par clé
+
+```bash
+sudo nano /etc/ssh/sshd_config
+```
+- Adapter le fichier de configuration ssh pour forcer l’authentification par clé uniquement
+```
+PermitRootLogin prohibit-password
+PubkeyAuthentication yes
+PasswordAuthentication no
+
+```
+![alt text](Images/Crypto_SSH/ssh_config.png)
+
+- Redémarrer le service SSH pour appliquer la configuration
+   
+```bash
+sudo systemctl restart ssh
+```
+
+## Partie2 : Validation du fonctionnement
+
+- Connectez-vous au serveur sans mot de passe à l’aide de votre clé privée
+
+```bash
+ ssh -i $env:USERPROFILE\.ssh\id_rsa_VM_ansible root@192.168.1.13
+```
+![alt text](Images/Crypto_SSH/Connexion.png)
+
+- Répondez aux questions suivantes :
+
+  - Ce qui se passe si vous supprimez la clé privée 
+     - On ne peut plus se connecter au serveur.
+
+  - Comment réactiver l'authentification par mot de passe en cas de besoin
+     - il faut passer le champ "PasswordAuthentication" de "no" à "yes", et redemarrer les services.
+
+## Supplement : Créer un alias SSH
+
+- Dans le Dossier .ssh creer un fichier config avec le bloc notes et supprimer l'extension .txt
+  - Ouvrez ce fichier et coller :
+```
+Host NOM_CHOISI "ex: VM"
+    HostName IP du serveur 
+    User Nom de l'user
+    Port 22 par default 
+    IdentityFile Chemin\de\la\cle\privee
+```
+![alt text](Images/Crypto_SSH/config_alias.png)
+
+- Test de connexion
+
+```bash
+ ssh VM
+```
+![alt text](Images/Crypto_SSH/Connexion_alias.png)
+
+## Partie 3 : Bonus
+
+- Activation et utilisation de ssh-agent
+
+- Quel est le rôle de ssh-agent ?
+ - Stocker les clés privées en mémoire
+ - Éviter de taper la passphrase à chaque connexion
+ - Gérer plusieurs clés facilement
+
+ - Configurez et testez ssh-agent
+     - Sur l’OS Windows
+
+ ```bash
+ssh-add $env:USERPROFILE\.ssh\id_rsa_VM_ansible
+```
+![alt text](Images/Crypto_SSH/Add_agent_windows.png)
+
+- Test de Connexion IP + Alias
+
+  ![alt text](Images/Crypto_SSH/Connexion_avec_agent.png)
+
+  
