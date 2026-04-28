@@ -526,4 +526,9 @@ ssh-add $env:USERPROFILE\.ssh\id_rsa_VM_ansible
 
   ![alt text](Images/Crypto_SSH/Connexion_avec_agent.png)
 
-  
+
+# TP4 RockYou John
+
+- Vous devez cracker les différents fichiers mis à votre disposition
+
+- Utiliser pour cela John The Ripper et la wordlist « RockYou »
