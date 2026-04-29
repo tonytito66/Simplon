@@ -967,7 +967,7 @@ Votre objectif : Mettre en place SSL sur le serveur web à l'aide de Certbot et 
 ![alt text](Images/Crypto_TP5/https_warning.png)
 
 
-*   **Comment résoudre le problème lié au certificat auto-signé / autorité inconnue ?** Il faut importer le certificat dans le navigateur pour lui dire que ce certificat et valide
+*   **Comment résoudre le problème lié au certificat auto-signé / autorité inconnue ?** Il faut importer le certificat dans le navigateur pour lui dire que ce certificat est valide
 
 
 
