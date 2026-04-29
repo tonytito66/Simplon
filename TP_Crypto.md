@@ -1019,29 +1019,44 @@ certbot --apache --server https://pki.simplon.local:8443/acme/acme/directory
 1.  Lancez une nouvelle capture Wireshark.
 2.  Allez sur `[https://web.simplon.local/](https://web.simplon.local/)`.
 3.  **Analyse** : Le trafic est désormais chiffré. Quel protocole est utilisé ? HTTP avec OverTLS  (Regardez dans Wireshark, vous devriez voir du `TLS 1.3`).
-Normalement vous devez voire du TLS 1.3. Si ce n’est pas le cas, votre navigateur n’est pas a jour ou est mal configuré
+Normalement vous devez voire du TLS 1.3. Si ce n’est pas le cas, votre navigateur n’est pas a jour ou est mal configuré.
+Dans Chrome, taper > chrome://flags/#tls13-variant.
 
 ![alt text](<Images/Crypto_TP5/TLS 1.3.png>)
 
 ![alt text](Images/Crypto_TP5/chiffre.png)
 
-Dans Chrome, taper > chrome://flags/#tls13-variant
+
+
 4.  **Alerte de sécurité du navigateur** : Votre navigateur affichera un avertissement de sécurité. C'est normal, votre VM Client ne connaît pas encore la PKI interne !
+
 5.  **Résolution côté client** :
     *   Depuis votre VM Client, rendez-vous sur l'URL : `[https://pki.simplon.local:8443/roots.pem](https://pki.simplon.local:8443/roots.pem)`
     *   Le certificat racine se télécharge.
     *   Importez-le dans le magasin de certificats de votre système d'exploitation ou directement dans les paramètres de votre navigateur (Autorités de certification de confiance).
     *   Rechargez la page web : le cadenas vert doit s'afficher.
 
-    ![alt text](Images/Crypto_TP5/DL_Cert_navigateur.png)
+- *Telechargements du Certificats:*
 
-    ![alt text](Images/Crypto_TP5/import_pki_trust.png)
+![alt text](Images/Crypto_TP5/DL_Cert_navigateur.png)
 
-    ![alt text](Images/Crypto_TP5/cert_navigateur.png)
+- *Importation dans le Navigateur du certificats:*
 
-    ![alt text](Images/Crypto_TP5/cert_navigateur2.png)
+![alt text](Images/Crypto_TP5/import_pki_trust.png)
 
-    ![alt text](Images/Crypto_TP5/cert_navigateur3.png)
+- *Details du certificats:*
 
-    ![alt text](Images/Crypto_TP5/cert_navigateur4.png)
+![alt text](Images/Crypto_TP5/cert_navigateur.png)
+
+- *Details du certificats:*
+
+![alt text](Images/Crypto_TP5/cert_navigateur2.png)
+
+- *Details du certificats:*
+
+![alt text](Images/Crypto_TP5/cert_navigateur3.png)
+
+- *Details du certificats:*
+
+![alt text](Images/Crypto_TP5/cert_navigateur4.png)
   
