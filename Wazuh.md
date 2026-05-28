@@ -128,7 +128,9 @@ af-packet:
 
   Puis
 
-  ```sudo systemctl restart suricata```
+  ```bash
+  sudo systemctl restart suricata
+  ```
 
   #### Installation AGENT Wazuh sur Linux (Debian 12)
 
@@ -418,7 +420,7 @@ sudo systemctl restart wazuh-agent
 
 ### 7 - Traitement de malware à travers l'intégration de VirusTotal : https://documentation.wazuh.com/current/proof-of-concept-guide/detect-remove-malware-virustotal.html
 
-- SUR L'AGENT
+> - *SUR L'AGENT*
 
 #### Rechercher le **syscheck** bloc dans le fichier de configuration de l'agent Wazuh /var/ossec/etc/ossec.conf. Assurez-vous que **disabled** est réglé sur **no**. Cela permet au Wazuh FIM de surveiller les modifications de répertoire.
 
@@ -487,7 +489,7 @@ sudo chown root:wazuh /var/ossec/active-response/bin/remove-threat.sh
 ```bash
 sudo systemctl restart wazuh-agent
 ```
-- SUR LE SERVEUR WAZUH
+> - *SUR LE SERVEUR WAZUH*
 
 *Effectuez les étapes suivantes sur le serveur Wazuh pour alerter des modifications dans le répertoire des points de terminaison et activer l’intégration VirusTotal. Ces étapes activent et déclenchent également le script de réponse actif chaque fois qu’un fichier suspect est détecté.*
 
@@ -577,7 +579,7 @@ sudo curl -Lo /root/eicar.com https://secure.eicar.org/eicar.com && sudo ls -lah
 
 *Le module de détection de vulnérabilité Wazuh est activé par défaut et génère des alertes lorsque de nouvelles vulnérabilités sont détectées ou lorsque des vulnérabilités existantes sont résolues via des mises à jour de packages, des suppressions ou des mises à niveau du système.*
 
-- SUR SERVEUR WAZUH
+> - *SUR SERVEUR WAZUH*
 
 #### Ouvrez la configuration Wazuh /var/ossec/etc/ossec.conf et vérifiez les paramètres suivants
 
@@ -677,7 +679,7 @@ systemctl restart wazuh-agent
 ```
 #### Test D'attaque 
 
-- SUR L'AGENT
+> - *SUR L'AGENT*
 
 #### Récupérez le code source du rootkit Diamorphine depuis GitHub
 
