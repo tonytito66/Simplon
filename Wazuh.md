@@ -19,6 +19,13 @@ l’amélioration continue des règles de détection
 L’ensemble des opérations devra respecter les bonnes pratiques de cybersécurité et être documenté afin de permettre une exploitation par l’équipe informatique.
 
 
+
+## Schéma de l’architecture de supervision
+
+![alt text](<Images/Wazuh/Schéma de l’architecture de supervision.drawio.png>)
+
+
+
 ## Mission 1 : Installation et Configuration de Wazuh - Installer Wazuh dans un environnement simulé et configurer la collecte de logs
 
 ### Installation OS 
