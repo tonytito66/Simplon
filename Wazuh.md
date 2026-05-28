@@ -34,12 +34,17 @@ L’ensemble des opérations devra respecter les bonnes pratiques de cybersécur
 
 - Je mets à jour la liste des paquets et je mets à jour ensuite le système
 
-`sudo apt update && sudo apt upgrade -y`  
+```bash
+sudo apt update && sudo apt upgrade -y
+```  
 
 ### Installation Wazuh
 
 Installation de Wazuh avec curl (après instll de curl)  
-`curl -sO https://packages.wazuh.com/4.14/wazuh-install.sh && sudo bash ./wazuh-install.sh -a`  
+
+```bash
+curl -sO https://packages.wazuh.com/4.14/wazuh-install.sh && sudo bash ./wazuh-install.sh -a
+```  
 
 - A la fin de l'installation le username et un password fort sont générés automatiquement.  
 
@@ -49,12 +54,18 @@ Installation de Wazuh avec curl (après instll de curl)
 
 ![alt text](Images/Wazuh/connexion_wazuh.png)
 
-- Les user/password sont stockés dans un ficher compressé accessible avec : `sudo tar -O -xvf wazuh-install-files.tar wazuh-install-files/wazuh-passwords.txt`  
+- Les user/password sont stockés dans un ficher compressé accessible avec 
+
+```bash
+sudo tar -O -xvf wazuh-install-files.tar wazuh-install-files/wazuh-passwords.txt
+```
 
 - Désactivation des mises à jour de Wazuh pour éviter les mises à jour accidentelles susceptibles de perturber l'environnement :  
 
-`sudo sed -i "s/^deb /#deb /" /etc/apt/sources.list.d/wazuh.list`  
-`sudo apt update`  
+```bash
+sudo sed -i "s/^deb /#deb /" /etc/apt/sources.list.d/wazuh.list
+sudo apt update
+```
 
 
 ## Mission 2 : Explorer les capacités de Wazuh à travers les différents uses cases proposés dans sa documentation officielle (à travers la réalisation de use-cases pratiques)
